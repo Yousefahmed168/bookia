@@ -1,5 +1,5 @@
-import '../auth/page/login_screen.dart.dart';
-import '../auth/page/register_screen.dart';
+import '../auth/presentation/page/login_screen.dart.dart';
+import '../auth/presentation/page/register_screen.dart';
 
 import '../../core/constants/app_images.dart';
 import '../../core/functions/navigations.dart';

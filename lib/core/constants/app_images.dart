@@ -10,4 +10,5 @@ abstract class AppImages {
   static const String appleSvg = 'assets/icons/apple.svg';
   static const String profileSvg = 'assets/icons/profile.svg';
   static const String searchSvg = 'assets/icons/search-normal.svg';
+  static const String loadingJson = 'assets/images/loading.json';
 }

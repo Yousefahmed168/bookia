@@ -5,10 +5,22 @@ Bookia is a high-performance, cross-platform application designed to streamline 
 
 ## Screenshots
 
-<p float="left">
-  <img src="assets/screenshots/splash.png" width="30%" />
-  <img src="assets/screenshots/welcome.png" width="30%" />
-  <img src="assets/screenshots/login.png" width="30%" />
-  <img src="assets/screenshots/register.png" width="30%" />
-</p>
 
+### Welcome & Splash
+| Welcome Screen | Splash Screen |
+|:--------------:|:-------------:|
+| ![Welcome](assets/screenshots/welcome.png) | ![Splash](assets/screenshots/splash.png) |
+
+---
+
+### Auth Screens
+| Login Screen | Register Screen |
+|:------------:|:---------------:|
+| ![Login](assets/screenshots/login.png) | ![Register](assets/screenshots/register.png) |
+
+---
+
+### Password Recovery
+| Forgot Password | OTP Verification | Create Password | Password Changed |
+|:---------------:|:----------------:|:---------------:|:----------------:|
+| ![Forgot](assets/screenshots/forgot_password.png) | ![OTP](assets/screenshots/otp.png) | ![Create](assets/screenshots/new_password.png) | ![success](assets/screenshots/success.png) |
