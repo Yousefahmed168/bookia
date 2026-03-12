@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:bookia/core/srevices/local/shared_pref.dart';
+
 import '../../../../core/srevices/dio/apis.dart';
 import '../../../../core/srevices/dio/dio_provider.dart';
 import '../models/otpcode_respose.dart';
@@ -9,12 +11,15 @@ import '../models/auth_response/register_response.dart';
 class AuthRepo {
   static Future<AuthResponse?> register(RegisterParams params) async {
     try {
+      log(params.toJson().toString());
       var response = await DioProvider.post(
         endpoint: Apis.register,
         data: params.toJson(),
       );
       if (response.statusCode == 201) {
         var data = AuthResponse.fromJson(response.data);
+        await SharedPref.setToken(data.data?.token ?? '');
+        await SharedPref.setUserInfo(data.data?.user);
         return data;
       } else {
         return null;
@@ -33,6 +38,8 @@ class AuthRepo {
       );
       if (response.statusCode == 200) {
         var data = AuthResponse.fromJson(response.data);
+        await SharedPref.setToken(data.data?.token ?? '');
+        await SharedPref.setUserInfo(data.data?.user);
         return data;
       } else {
         return null;

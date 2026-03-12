@@ -24,3 +24,10 @@ Bookia is a high-performance, cross-platform application designed to streamline 
 | Forgot Password | OTP Verification | Create Password | Password Changed |
 |:---------------:|:----------------:|:---------------:|:----------------:|
 | ![Forgot](assets/screenshots/forgot_password.png) | ![OTP](assets/screenshots/otp.png) | ![Create](assets/screenshots/new_password.png) | ![success](assets/screenshots/success.png) |
+
+---
+
+### Home Screen
+| Home Screen |
+|:-------------:|
+| ![Home](assets/screenshots/home_screen.png) |

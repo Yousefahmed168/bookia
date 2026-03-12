@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import '../../../../core/widgets/dialog.dart';
 import '../../../../core/widgets/my_body_view.dart';
 import '../cubit/auth_cubit.dart';
@@ -65,8 +63,7 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccessState) {
-          pop(context);
-          log("success");
+          pushToBase(context, MainAppScreen());
         } else if (state is AuthErrorState) {
           pop(context);
           showErrorDialog(context, state.message);
@@ -89,7 +86,7 @@ class LoginScreen extends StatelessWidget {
                   Gap(32),
                   CustomTextFormField(
                     controller: cubit.emailController,
-                    hintText: "Email",
+                    hintText: 'Enter your email',
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -126,7 +123,6 @@ class LoginScreen extends StatelessWidget {
                   MainButton(
                     text: 'Login',
                     onPressed: () {
-                      pushReplacement(context, MainAppScreen());
                       if (cubit.formKey.currentState!.validate()) {
                         cubit.login();
                       }

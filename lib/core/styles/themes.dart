@@ -1,8 +1,7 @@
+import 'package:bookia/core/constants/app_fonts.dart';
+import 'package:bookia/core/styles/colors.dart';
+import 'package:bookia/core/styles/text_styles.dart';
 import 'package:flutter/material.dart';
-
-import '../constants/app_fonts.dart';
-import 'colors.dart';
-import 'text_styles.dart';
 
 abstract class AppThemes {
   static ThemeData get lightTheme => ThemeData(
@@ -57,6 +56,8 @@ abstract class AppThemes {
         fontWeight: FontWeight.w600,
         height: 2,
       ),
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
       elevation: 0,
     ),
     colorScheme: ColorScheme.fromSeed(

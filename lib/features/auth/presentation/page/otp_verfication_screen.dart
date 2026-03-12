@@ -78,7 +78,7 @@ class OtpVerficationScreen extends StatelessWidget {
                       textColor: AppColors.backgroundColor,
                       onPressed: () {
                         pushReplacement(context, CreateNewPasswordScreen());
-                        // cubit.otpcode();
+                        cubit.otpcode();
                       },
                     ),
                     Gap(340),

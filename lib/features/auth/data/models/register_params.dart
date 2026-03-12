@@ -11,11 +11,14 @@ class RegisterParams {
     this.passwordConfirmation,
   });
 
-
   Map<String, dynamic> toJson() => {
     'name': name,
     'email': email,
     'password': password,
     'password_confirmation': passwordConfirmation,
   };
+  @override
+  String toString() {
+    return "name,$name email,$email password,$password passwordConfirmation,$passwordConfirmation";
+  }
 }

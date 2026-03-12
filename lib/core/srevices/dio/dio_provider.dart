@@ -17,8 +17,8 @@ abstract class DioProvider {
     return await dio.post(
       endpoint,
       data: data,
-      options: Options(headers: headers),
       queryParameters: queryParameters,
+      options: Options(headers: headers),
     );
   }
 
@@ -31,8 +31,8 @@ abstract class DioProvider {
     return await dio.get(
       endpoint,
       data: data,
-      options: Options(headers: headers),
       queryParameters: queryParameters,
+      options: Options(headers: headers),
     );
   }
 
@@ -45,8 +45,8 @@ abstract class DioProvider {
     return await dio.put(
       endpoint,
       data: data,
-      options: Options(headers: headers),
       queryParameters: queryParameters,
+      options: Options(headers: headers),
     );
   }
 
@@ -59,8 +59,8 @@ abstract class DioProvider {
     return await dio.delete(
       endpoint,
       data: data,
-      options: Options(headers: headers),
       queryParameters: queryParameters,
+      options: Options(headers: headers),
     );
   }
 
@@ -73,8 +73,8 @@ abstract class DioProvider {
     return await dio.patch(
       endpoint,
       data: data,
-      options: Options(headers: headers),
       queryParameters: queryParameters,
+      options: Options(headers: headers),
     );
   }
 }

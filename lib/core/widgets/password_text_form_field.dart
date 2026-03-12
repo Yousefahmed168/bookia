@@ -1,3 +1,4 @@
+import 'package:bookia/core/styles/colors.dart';
 import 'package:flutter/material.dart';
 
 class PasswordTextFormField extends StatefulWidget {
@@ -7,7 +8,6 @@ class PasswordTextFormField extends StatefulWidget {
     required this.controller,
     this.validator,
   });
-
   final String? hintText;
   final TextEditingController controller;
   final String? Function(String?)? validator;
@@ -18,7 +18,6 @@ class PasswordTextFormField extends StatefulWidget {
 
 class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
   bool obscureText = true;
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -26,8 +25,8 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
       obscureText: obscureText,
       decoration: InputDecoration(
         hintText: widget.hintText,
-        // labelText: 'Email',
         suffixIcon: IconButton(
+          color: AppColors.greyColor,
           onPressed: () {
             setState(() {
               obscureText = !obscureText;
