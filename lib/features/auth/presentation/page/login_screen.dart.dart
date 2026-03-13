@@ -1,10 +1,6 @@
-import '../../../../core/widgets/dialog.dart';
-import '../../../../core/widgets/my_body_view.dart';
-import '../cubit/auth_cubit.dart';
-import '../cubit/auth_state.dart';
-import 'forgot_password.dart';
-import '../../../main/main_app_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/functions/navigations.dart';
@@ -13,11 +9,15 @@ import '../../../../core/styles/colors.dart';
 import '../../../../core/styles/text_styles.dart';
 import '../../../../core/widgets/custom_svg_picture.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../core/widgets/dialog.dart';
 import '../../../../core/widgets/main_button.dart';
+import '../../../../core/widgets/my_body_view.dart';
 import '../../../../core/widgets/password_text_form_field.dart';
+import '../../../main/main_app_screen.dart';
+import '../cubit/auth_cubit.dart';
+import '../cubit/auth_state.dart';
 import '../widgets/social_button.dart';
-import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'forgot_password.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

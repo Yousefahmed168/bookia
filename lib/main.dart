@@ -1,4 +1,4 @@
-import 'package:bookia/core/srevices/local/shared_pref.dart';
+import 'core/srevices/local/shared_pref.dart';
 import 'package:flutter/material.dart';
 
 import 'app.dart';

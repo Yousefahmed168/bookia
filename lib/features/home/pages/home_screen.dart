@@ -1,9 +1,9 @@
-import 'package:bookia/core/constants/app_images.dart';
-import 'package:bookia/core/styles/colors.dart';
-import 'package:bookia/core/styles/text_styles.dart';
-import 'package:bookia/core/widgets/custom_svg_picture.dart';
-import 'package:bookia/features/home/widgets/best_seller_books.dart';
-import 'package:bookia/features/home/widgets/home_slider.dart';
+import '../../../core/constants/app_images.dart';
+import '../../../core/styles/colors.dart';
+import '../../../core/styles/text_styles.dart';
+import '../../../core/widgets/custom_svg_picture.dart';
+import '../widgets/best_seller_books.dart';
+import '../widgets/home_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -17,7 +17,12 @@ class HomeScreen extends StatelessWidget {
         centerTitle: false,
         automaticallyImplyLeading: false,
         title: CustomSvgPicture(path: AppImages.logoSvg, height: 30),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: CustomSvgPicture(path: AppImages.searchSvg),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -39,8 +44,8 @@ class HomeScreen extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 11,
-                  crossAxisSpacing: 11,
+                  mainAxisSpacing: 1,
+                  crossAxisSpacing: 1,
                   childAspectRatio: 0.6,
                   mainAxisExtent: 300,
                 ),

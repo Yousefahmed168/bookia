@@ -1,7 +1,7 @@
 
-import 'package:bookia/core/styles/colors.dart';
-import 'package:bookia/core/styles/text_styles.dart';
-import 'package:bookia/core/widgets/main_button.dart';
+import '../../../core/styles/colors.dart';
+import '../../../core/styles/text_styles.dart';
+import '../../../core/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 

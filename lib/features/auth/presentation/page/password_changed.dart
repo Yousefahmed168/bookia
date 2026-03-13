@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
+
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/functions/navigations.dart';
 import '../../../../core/styles/colors.dart';
@@ -6,9 +10,6 @@ import '../../../../core/widgets/custom_svg_picture.dart';
 import '../../../../core/widgets/main_button.dart';
 import '../cubit/auth_cubit.dart';
 import 'login_screen.dart.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 
 class PasswordChanged extends StatelessWidget {
   const PasswordChanged({super.key});

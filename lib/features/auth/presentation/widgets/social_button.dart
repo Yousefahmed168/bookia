@@ -1,57 +1,7 @@
-// import 'package:bookia/core/constants/app_images.dart';
-// import 'package:bookia/core/styles/colors.dart';
-// import 'package:bookia/core/styles/text_styles.dart';
-// import 'package:bookia/core/widgets/custom_svg_picture.dart';
-// import 'package:flutter/material.dart';
-// import 'package:gap/gap.dart';
-
-// class SocialButton extends StatelessWidget {
-//   const SocialButton({
-//     super.key,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         Row(
-//           children: [
-//             Expanded(
-//               child: Divider(thickness: 1, color: AppColors.greyColor),
-//             ),
-//             Gap(20),
-//             Text("Or", style: TextStyles.body),
-//             Gap(20),
-//             Expanded(
-//               child: Divider(thickness: 1, color: AppColors.greyColor),
-//             ),
-//           ],
-//         ),
-//         Gap(20),
-//         Container(
-//           height: 50,
-//           decoration: BoxDecoration(
-//             borderRadius: BorderRadius.circular(10),
-//             border: Border.all(color: AppColors.greyColor),
-//           ),
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               CustomSvgPicture(path: AppImages.googleSvg),
-//               Gap(10),
-//               Text("Continue with Google", style: TextStyles.body),
-//             ],
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
-
-import 'package:bookia/core/constants/app_images.dart';
-import 'package:bookia/core/styles/colors.dart';
-import 'package:bookia/core/styles/text_styles.dart';
-import 'package:bookia/core/widgets/custom_svg_picture.dart';
+import '../../../../core/constants/app_images.dart';
+import '../../../../core/styles/colors.dart';
+import '../../../../core/styles/text_styles.dart';
+import '../../../../core/widgets/custom_svg_picture.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 

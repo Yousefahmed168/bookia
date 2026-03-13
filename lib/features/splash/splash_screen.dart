@@ -1,5 +1,5 @@
-import 'package:bookia/core/srevices/local/shared_pref.dart';
-import 'package:bookia/features/main/main_app_screen.dart';
+import '../../core/srevices/local/shared_pref.dart';
+import '../main/main_app_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import '../../core/constants/app_images.dart';

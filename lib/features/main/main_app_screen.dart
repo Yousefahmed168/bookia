@@ -1,7 +1,7 @@
-import 'package:bookia/core/constants/app_images.dart';
-import 'package:bookia/core/styles/colors.dart';
-import 'package:bookia/core/widgets/custom_svg_picture.dart';
-import 'package:bookia/features/home/pages/home_screen.dart';
+import '../../core/constants/app_images.dart';
+import '../../core/styles/colors.dart';
+import '../../core/widgets/custom_svg_picture.dart';
+import '../home/pages/home_screen.dart';
 
 import 'package:flutter/material.dart';
 

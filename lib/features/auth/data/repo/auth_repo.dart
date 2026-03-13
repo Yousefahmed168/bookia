@@ -1,12 +1,11 @@
 import 'dart:developer';
 
-import 'package:bookia/core/srevices/local/shared_pref.dart';
-
 import '../../../../core/srevices/dio/apis.dart';
 import '../../../../core/srevices/dio/dio_provider.dart';
+import '../../../../core/srevices/local/shared_pref.dart';
+import '../models/auth_response/register_response.dart';
 import '../models/otpcode_respose.dart';
 import '../models/register_params.dart';
-import '../models/auth_response/register_response.dart';
 
 class AuthRepo {
   static Future<AuthResponse?> register(RegisterParams params) async {

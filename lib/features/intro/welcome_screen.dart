@@ -1,5 +1,5 @@
-import '../auth/presentation/page/login_screen.dart.dart';
-import '../auth/presentation/page/register_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 import '../../core/constants/app_images.dart';
 import '../../core/functions/navigations.dart';
@@ -7,8 +7,8 @@ import '../../core/styles/colors.dart';
 import '../../core/styles/text_styles.dart';
 import '../../core/widgets/custom_svg_picture.dart';
 import '../../core/widgets/main_button.dart';
-import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import '../auth/presentation/page/login_screen.dart.dart';
+import '../auth/presentation/page/register_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});

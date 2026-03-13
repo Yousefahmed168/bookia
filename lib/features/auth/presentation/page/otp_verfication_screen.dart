@@ -1,5 +1,10 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
+import 'package:pinput/pinput.dart';
+
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/functions/navigations.dart';
 import '../../../../core/styles/colors.dart';
@@ -11,11 +16,6 @@ import '../cubit/auth_cubit.dart';
 import '../cubit/auth_state.dart';
 import 'forgot_password.dart';
 import 'new_password_screen.dart';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
-import 'package:pinput/pinput.dart';
 
 class OtpVerficationScreen extends StatelessWidget {
   const OtpVerficationScreen({super.key});

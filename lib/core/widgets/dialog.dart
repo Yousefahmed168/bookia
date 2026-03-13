@@ -1,8 +1,9 @@
-import '../constants/app_images.dart';
-import '../styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
+
+import '../constants/app_images.dart';
+import '../styles/colors.dart';
 
 void showErrorDialog(BuildContext context, String errorMsg) {
   ScaffoldMessenger.of(context).showSnackBar(

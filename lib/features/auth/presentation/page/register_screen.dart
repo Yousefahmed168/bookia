@@ -1,4 +1,4 @@
-import 'package:bookia/features/main/main_app_screen.dart';
+import '../../../main/main_app_screen.dart';
 
 import '../../../../core/widgets/dialog.dart';
 import '../../../../core/widgets/my_body_view.dart';

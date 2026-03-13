@@ -1,5 +1,5 @@
-import 'package:bookia/core/constants/app_images.dart';
-import 'package:bookia/core/styles/colors.dart';
+import '../../../core/constants/app_images.dart';
+import '../../../core/styles/colors.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
