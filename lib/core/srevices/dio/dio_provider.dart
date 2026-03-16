@@ -1,5 +1,6 @@
-import 'apis.dart';
 import 'package:dio/dio.dart';
+
+import 'apis.dart';
 
 abstract class DioProvider {
   static late final Dio dio;

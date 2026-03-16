@@ -7,6 +7,7 @@ import 'package:pinput/pinput.dart';
 
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/functions/navigations.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/styles/colors.dart';
 import '../../../../core/styles/text_styles.dart';
 import '../../../../core/widgets/custom_svg_picture.dart';
@@ -14,8 +15,6 @@ import '../../../../core/widgets/dialog.dart';
 import '../../../../core/widgets/main_button.dart';
 import '../cubit/auth_cubit.dart';
 import '../cubit/auth_state.dart';
-import 'forgot_password.dart';
-import 'new_password_screen.dart';
 
 class OtpVerficationScreen extends StatelessWidget {
   const OtpVerficationScreen({super.key});
@@ -77,7 +76,7 @@ class OtpVerficationScreen extends StatelessWidget {
                       text: 'Verify ',
                       textColor: AppColors.backgroundColor,
                       onPressed: () {
-                        pushReplacement(context, CreateNewPasswordScreen());
+                        pushReplacement(context,  Routes.createnewpassword);
                         cubit.otpcode();
                       },
                     ),
@@ -95,7 +94,7 @@ class OtpVerficationScreen extends StatelessWidget {
             children: [
               Text("Didn’t received code?   ", style: TextStyles.body),
               GestureDetector(
-                onTap: () => pushTo(context, const ForgetPasswordScreen()),
+                onTap: () => pushTo(context,  Routes.forgetpassword),
                 child: Text(
                   "Resend",
                   style: TextStyles.body.copyWith(

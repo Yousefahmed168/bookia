@@ -1,7 +1,7 @@
 # Bookia Appstore
 Elevating the Digital Reading Experience.
 
-Bookia is a high-performance, cross-platform application designed to streamline the way users discover, acquire, and consume literature.  Bookia provides a frictionless gateway to a world of knowledge.
+Bookia is a modern, high-performance, and cross-platform application that revolutionizes how users discover, acquire, and read digital literature. With its intuitive interface, Bookia provides a seamless and frictionless gateway to a world of knowledge.
 
 ## Screenshots
 
@@ -28,6 +28,6 @@ Bookia is a high-performance, cross-platform application designed to streamline 
 ---
 
 ### Home Screen
-| Home Screen |
-|:-------------:|
-| ![Home](assets/screenshots/home_screen.png) |
+| Home Screen || shimmer Screen || details Screen |
+|:-------------:||:-------------:||:-------------:|
+| ![Home](assets/screenshots/home_screen.png) || ![shimmer](assets/screenshots/shimmer.png) || ![details](assets/screenshots/details_screen.png) |

@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/styles/colors.dart';
 import '../../../../core/styles/text_styles.dart';
 import '../../../../core/widgets/custom_svg_picture.dart';
-import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 
 class SocialLoginButtons extends StatelessWidget {
   const SocialLoginButtons({super.key});

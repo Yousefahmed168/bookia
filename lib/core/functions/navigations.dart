@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-void pushReplacement(BuildContext context, Widget newScreen) {
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(builder: (context) => newScreen),
-  );
+void pushReplacement(BuildContext context, String route, {Object? extra}) {
+  return context.pushReplacement(route, extra: extra);
 }
 
-void pushTo(BuildContext context, Widget newScreen) {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => newScreen));
+Future pushTo(BuildContext context, String route, {Object? extra}) {
+  return context.push(route, extra: extra);
+}
+
+void pushToBase(BuildContext context, String route, {Object? extra}) {
+  return context.go(route, extra: extra);
 }
 
 void pop(BuildContext context) {
-  Navigator.pop(context);
-}
-void pushToBase(BuildContext context, Widget newScreen) {
-  Navigator.pushAndRemoveUntil(
-    context,
-    MaterialPageRoute(builder: (context) => newScreen),
-    (route) => false,
-  );
+  context.pop();
 }

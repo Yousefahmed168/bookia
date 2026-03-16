@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import '../../../../core/routes/routes.dart';
+
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/functions/navigations.dart';
 import '../../../../core/functions/validations.dart';
@@ -11,8 +13,6 @@ import '../../../../core/widgets/dialog.dart';
 import '../../../../core/widgets/main_button.dart';
 import '../cubit/auth_cubit.dart';
 import '../cubit/auth_state.dart';
-import 'login_screen.dart.dart';
-import 'otp_verfication_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -83,7 +83,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                       text: 'Send Code ',
                       textColor: AppColors.backgroundColor,
                       onPressed: () {
-                        pushTo(context, OtpVerficationScreen());
+                        pushTo(context, Routes.otpverfication);
                         if (cubit.formKey.currentState!.validate()) {
                           cubit.forgetpassword();
                         }
@@ -104,7 +104,7 @@ class ForgetPasswordScreen extends StatelessWidget {
             children: [
               Text("Remember Password? ", style: TextStyles.body),
               GestureDetector(
-                onTap: () => pushTo(context, const LoginScreen()),
+                onTap: () => pushTo(context, Routes.loginscreen),
                 child: Text(
                   "Login",
                   style: TextStyles.body.copyWith(

@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
+
 import '../../core/constants/app_images.dart';
 import '../../core/styles/colors.dart';
 import '../../core/widgets/custom_svg_picture.dart';
-import '../home/pages/home_screen.dart';
-
-import 'package:flutter/material.dart';
+import '../home/presentation/pages/home_screen.dart';
 
 class MainAppScreen extends StatefulWidget {
   const MainAppScreen({super.key});

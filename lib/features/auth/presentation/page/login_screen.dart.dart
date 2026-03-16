@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/functions/navigations.dart';
 import '../../../../core/functions/validations.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/styles/colors.dart';
 import '../../../../core/styles/text_styles.dart';
 import '../../../../core/widgets/custom_svg_picture.dart';
@@ -13,11 +14,9 @@ import '../../../../core/widgets/dialog.dart';
 import '../../../../core/widgets/main_button.dart';
 import '../../../../core/widgets/my_body_view.dart';
 import '../../../../core/widgets/password_text_form_field.dart';
-import '../../../main/main_app_screen.dart';
 import '../cubit/auth_cubit.dart';
 import '../cubit/auth_state.dart';
 import '../widgets/social_button.dart';
-import 'forgot_password.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -63,7 +62,7 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccessState) {
-          pushToBase(context, MainAppScreen());
+          pushToBase(context, Routes.mainappscreen);
         } else if (state is AuthErrorState) {
           pop(context);
           showErrorDialog(context, state.message);
@@ -108,7 +107,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          pushTo(context, ForgetPasswordScreen());
+                          pushTo(context,  Routes.forgetpassword);
                         },
                         child: Text(
                           'Forgot Password?',

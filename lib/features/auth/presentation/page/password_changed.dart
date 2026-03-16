@@ -4,12 +4,12 @@ import 'package:gap/gap.dart';
 
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/functions/navigations.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/styles/colors.dart';
 import '../../../../core/styles/text_styles.dart';
 import '../../../../core/widgets/custom_svg_picture.dart';
 import '../../../../core/widgets/main_button.dart';
 import '../cubit/auth_cubit.dart';
-import 'login_screen.dart.dart';
 
 class PasswordChanged extends StatelessWidget {
   const PasswordChanged({super.key});
@@ -63,7 +63,7 @@ class _SignUpView extends StatelessWidget {
                         MainButton(
                           text: "Back to Login",
                           onPressed: () {
-                            pushTo(context, LoginScreen());
+                            pushTo(context,  Routes.loginscreen);
                           },
                         ),
                         const Gap(250),

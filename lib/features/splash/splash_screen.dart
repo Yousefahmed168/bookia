@@ -1,12 +1,14 @@
-import '../../core/srevices/local/shared_pref.dart';
-import '../main/main_app_screen.dart';
+import 'dart:developer';
+
+import '../../core/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+
 import '../../core/constants/app_images.dart';
 import '../../core/functions/navigations.dart';
+import '../../core/srevices/local/shared_pref.dart';
 import '../../core/styles/text_styles.dart';
 import '../../core/widgets/custom_svg_picture.dart';
-import '../intro/welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,11 +23,13 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     String? token = SharedPref.getToken();
+    log(token.toString());
+
     Future.delayed(const Duration(seconds: 3), () {
       if (token != null && token.isNotEmpty) {
-        pushReplacement(context, MainAppScreen());
+        pushReplacement(context,  Routes.mainappscreen);
       } else {
-        pushReplacement(context, WelcomeScreen());
+        pushReplacement(context, Routes.welcomescreen);
       }
     });
   }

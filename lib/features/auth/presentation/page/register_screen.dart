@@ -1,23 +1,21 @@
-import '../../../main/main_app_screen.dart';
-
-import '../../../../core/widgets/dialog.dart';
-import '../../../../core/widgets/my_body_view.dart';
-import '../cubit/auth_cubit.dart';
-import '../cubit/auth_state.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/functions/navigations.dart';
 import '../../../../core/functions/validations.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/styles/colors.dart';
 import '../../../../core/styles/text_styles.dart';
 import '../../../../core/widgets/custom_svg_picture.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../core/widgets/dialog.dart';
 import '../../../../core/widgets/main_button.dart';
+import '../../../../core/widgets/my_body_view.dart';
 import '../../../../core/widgets/password_text_form_field.dart';
-import 'login_screen.dart.dart';
-import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import '../cubit/auth_cubit.dart';
+import '../cubit/auth_state.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -45,7 +43,7 @@ class RegisterScreen extends StatelessWidget {
             children: [
               Text("Already have an account?  ", style: TextStyles.body),
               GestureDetector(
-                onTap: () => pushTo(context, const LoginScreen()),
+                onTap: () => pushTo(context,  Routes.loginscreen),
                 child: Text(
                   "Login Now",
                   style: TextStyles.body.copyWith(
@@ -64,7 +62,7 @@ class RegisterScreen extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccessState) {
-          pushToBase(context, MainAppScreen());
+          pushToBase(context, Routes.mainappscreen);
         } else if (state is AuthErrorState) {
           pop(context);
           showErrorDialog(context, state.message);

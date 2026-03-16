@@ -10,5 +10,4 @@ abstract class AppColors {
   static const Color darkGreyColor = Color(0XFF6A707C);
   static const Color darkColor = Color(0XFF2F2F2F);
   static const Color errorColor = Color(0XFFFF0000);
-
 }
