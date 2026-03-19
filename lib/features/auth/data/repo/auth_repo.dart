@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import '../../../../core/srevices/dio/apis.dart';
-import '../../../../core/srevices/dio/dio_provider.dart';
-import '../../../../core/srevices/local/shared_pref.dart';
+import '../../../../core/services/dio/apis.dart';
+import '../../../../core/services/dio/dio_provider.dart';
+import '../../../../core/services/local/shared_pref.dart';
 import '../models/auth_response/register_response.dart';
 import '../models/otpcode_respose.dart';
 import '../models/register_params.dart';
@@ -15,7 +15,7 @@ class AuthRepo {
         endpoint: Apis.register,
         data: params.toJson(),
       );
-      if (response.statusCode == 201) {
+      if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
         var data = AuthResponse.fromJson(response.data);
         await SharedPref.setToken(data.data?.token ?? '');
         await SharedPref.setUserInfo(data.data?.user);
@@ -35,7 +35,7 @@ class AuthRepo {
         endpoint: Apis.login,
         data: params.toJson(),
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
         var data = AuthResponse.fromJson(response.data);
         await SharedPref.setToken(data.data?.token ?? '');
         await SharedPref.setUserInfo(data.data?.user);
@@ -55,7 +55,7 @@ class AuthRepo {
         endpoint: Apis.forgetpassword,
         data: params.toJson(),
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
         return AuthResponse.fromJson(response.data);
       } else if (response.statusCode == 500) {
         return null;
@@ -74,7 +74,7 @@ class AuthRepo {
         data: params.toJson(),
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
         return Otpcode.fromJson(response.data);
       }
 
@@ -96,7 +96,7 @@ class AuthRepo {
         data: params.toJson(),
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
         return Otpcode.fromJson(response.data);
       }
 

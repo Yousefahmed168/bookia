@@ -1,3 +1,4 @@
+import 'package:bookia/features/wishlist/presentation/page/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/constants/app_images.dart';
@@ -16,7 +17,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
   int currentIndex = 0;
   List<Widget> screens = [
     HomeScreen(),
-    Center(child: Text('WishList')),
+    WishlistScreen(),
     Center(child: Text('cart')),
     Center(child: Text('Profile')),
   ];

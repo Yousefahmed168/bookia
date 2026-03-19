@@ -10,6 +10,7 @@ class GridShimmer extends StatelessWidget {
     this.childAspectRatio = 0.65,
     this.crossAxisSpacing = 15,
     this.mainAxisSpacing = 15,
+    this.shrinkWrap = true,
   });
 
   final int itemCount;
@@ -17,12 +18,12 @@ class GridShimmer extends StatelessWidget {
   final double childAspectRatio;
   final double crossAxisSpacing;
   final double mainAxisSpacing;
+  final bool shrinkWrap;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
+      shrinkWrap: shrinkWrap,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
         childAspectRatio: childAspectRatio,

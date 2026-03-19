@@ -1,6 +1,6 @@
+import 'package:bookia/core/routes/app_router.dart';
 import 'package:flutter/material.dart';
 
-import 'core/routes/routes.dart';
 import 'core/styles/themes.dart';
 
 class MainApp extends StatelessWidget {
@@ -9,7 +9,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: Routes.routes,
+      routerConfig: AppRouter.routes,
       debugShowCheckedModeBanner: false,
       theme: AppThemes.lightTheme,
     );

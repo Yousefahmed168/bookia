@@ -1,7 +1,8 @@
-import '../../../../core/constants/app_images.dart';
-import '../../../../core/functions/navigations.dart';
-import '../../../../core/widgets/custom_svg_picture.dart';
 import 'package:flutter/material.dart';
+
+import '../constants/app_images.dart';
+import '../functions/navigations.dart';
+import 'custom_svg_picture.dart';
 
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({super.key});

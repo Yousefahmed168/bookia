@@ -1,20 +1,22 @@
+import 'package:bookia/core/styles/colors.dart';
+import 'package:bookia/core/styles/text_styles.dart';
+import 'package:bookia/core/widgets/custom_back_button.dart';
+import 'package:bookia/core/widgets/main_button.dart';
+import 'package:bookia/core/widgets/my_body_view.dart';
+import 'package:bookia/features/details/presentation/widgets/wishlist_icon.dart';
+import 'package:bookia/features/home/data/models/best_seller_books_response/product.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import '../../../../core/constants/app_images.dart';
-import '../../../../core/styles/colors.dart';
-import '../../../../core/styles/text_styles.dart';
-import '../../../../core/widgets/custom_svg_picture.dart';
-import '../../../../core/widgets/main_button.dart';
-import '../../../../core/widgets/my_body_view.dart';
-import '../../../home/data/models/best_seller_books_response/product.dart';
-import '../widgets/custom_back_button.dart';
-
-class DetailsArg {}
+class DetailsArg {
+  final Product product;
+  final String source;
+  DetailsArg({required this.product, required this.source});
+}
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key, required this.product});
-  final Product product;
+  const DetailsScreen({super.key, required this.model});
+  final Product model;
 
   @override
   Widget build(BuildContext context) {
@@ -22,42 +24,40 @@ class DetailsScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: CustomBackButton(),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: CustomSvgPicture(path: AppImages.bookmarkSvg),
-          ),
-        ],
+        actions: [WishlistActionWidget(id: model.id ?? 0)],
       ),
       body: MyBodyView(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  product.image ?? '',
-                  width: 180,
-                  height: 270,
-                  fit: BoxFit.cover,
+              Hero(
+                tag: model.id ?? '',
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    model.image ?? '',
+                    width: 180,
+                    height: 270,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Gap(11),
               Text(
-                product.name ?? '',
+                model.name ?? '',
                 style: TextStyles.headline,
                 textAlign: TextAlign.center,
               ),
               Gap(11),
               Text(
-                product.category ?? '',
+                model.category ?? '',
                 style: TextStyles.caption1.copyWith(
                   color: AppColors.primaryColor,
                 ),
               ),
               Gap(20),
               Text(
-                product.description ?? '',
+                model.description ?? '',
                 textAlign: TextAlign.justify,
                 style: TextStyles.caption2.copyWith(color: AppColors.darkColor),
               ),
@@ -70,7 +70,7 @@ class DetailsScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('${product.price} \$', style: TextStyles.title),
+            Text('${model.price} \$', style: TextStyles.title),
             MainButton(
               bgColor: AppColors.darkColor,
               minWidth: 200,

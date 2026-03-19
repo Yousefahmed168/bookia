@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 
 import '../../core/constants/app_images.dart';
 import '../../core/functions/navigations.dart';
-import '../../core/srevices/local/shared_pref.dart';
+import '../../core/services/local/shared_pref.dart';
 import '../../core/styles/text_styles.dart';
 import '../../core/widgets/custom_svg_picture.dart';
 

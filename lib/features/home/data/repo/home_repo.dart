@@ -1,5 +1,5 @@
-import '../../../../core/srevices/dio/apis.dart';
-import '../../../../core/srevices/dio/dio_provider.dart';
+import '../../../../core/services/dio/apis.dart';
+import '../../../../core/services/dio/dio_provider.dart';
 import '../models/best_seller_books_response/best_seller_books_response.dart';
 import '../models/slider_response/slider_response.dart';
 
@@ -7,7 +7,7 @@ class HomeRepo {
   static Future<SliderResponse?> getSliders() async {
     try {
       var response = await DioProvider.get(endpoint: Apis.sliders);
-      if (response.statusCode == 200) {
+      if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
         return SliderResponse.fromJson(response.data);
       } else {
         return null;
@@ -20,7 +20,7 @@ class HomeRepo {
   static Future<BestSellerBooksResponse?> getBestSeller() async {
     try {
       var response = await DioProvider.get(endpoint: Apis.productsBestseller);
-      if (response.statusCode == 200) {
+      if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
         return BestSellerBooksResponse.fromJson(response.data);
       } else {
         return null;

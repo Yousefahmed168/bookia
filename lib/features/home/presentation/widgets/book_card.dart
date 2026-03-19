@@ -1,22 +1,30 @@
+import 'package:bookia/core/functions/navigations.dart';
+import 'package:bookia/core/routes/routes.dart';
+import 'package:bookia/core/styles/colors.dart';
+import 'package:bookia/core/styles/text_styles.dart';
+import 'package:bookia/core/widgets/main_button.dart';
+import 'package:bookia/features/home/data/models/best_seller_books_response/product.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import '../../../../core/functions/navigations.dart';
-import '../../../../core/routes/routes.dart';
-import '../../../../core/styles/colors.dart';
-import '../../../../core/styles/text_styles.dart';
-import '../../../../core/widgets/main_button.dart';
-import '../../data/models/best_seller_books_response/product.dart';
-
 class BookCard extends StatelessWidget {
-  const BookCard({super.key, required this.product});
+  const BookCard({
+    super.key,
+    required this.product,
+    this.onRemoveFromWishlist,
+    this.onRefresh,
+  });
   final Product product;
+  final Function()? onRemoveFromWishlist;
+  final Function()? onRefresh;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        pushTo(context, Routes.details, extra: product);
+        pushTo(context, Routes.details, extra: product).then((value) {
+          onRefresh?.call();
+        });
       },
       child: Container(
         padding: const EdgeInsets.all(10),
@@ -28,12 +36,15 @@ class BookCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  product.image ?? '',
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+              child: Hero(
+                tag: product.id ?? '',
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    product.image ?? '',
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -51,17 +62,33 @@ class BookCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('\$${product.priceAfterDiscount}', style: TextStyles.body),
-                SizedBox(
-                  height: 30,
-                  child: MainButton(
-                    minWidth: 70,
-                    minHeight: 30,
-                    bgColor: AppColors.darkColor,
-                    text: 'Buy',
-                    onPressed: () {},
-                  ),
+                Text(
+                  '\$${product.priceAfterDiscount ?? product.price}',
+                  style: TextStyles.body,
                 ),
+                onRemoveFromWishlist != null
+                    ? IconButton(
+                        onPressed: onRemoveFromWishlist,
+                        style: IconButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          minimumSize: Size(30, 30),
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        icon: const Icon(
+                          Icons.delete,
+                          color: AppColors.errorColor,
+                        ),
+                      )
+                    : SizedBox(
+                        height: 30,
+                        child: MainButton(
+                          minWidth: 70,
+                          minHeight: 30,
+                          bgColor: AppColors.darkColor,
+                          text: 'Buy',
+                          onPressed: () {},
+                        ),
+                      ),
               ],
             ),
           ],

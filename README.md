@@ -26,8 +26,8 @@ Bookia is a modern, high-performance, and cross-platform application that revolu
 | ![Forgot](assets/screenshots/forgot_password.png) | ![OTP](assets/screenshots/otp.png) | ![Create](assets/screenshots/new_password.png) | ![success](assets/screenshots/success.png) |
 
 ---
-
 ### Home Screen
-| Home Screen || shimmer Screen || details Screen |
-|:-------------:||:-------------:||:-------------:|
-| ![Home](assets/screenshots/home_screen.png) || ![shimmer](assets/screenshots/shimmer.png) || ![details](assets/screenshots/details_screen.png) |
+| Home Screen || shimmer Screen || details Screen | wishlist Screen |
+|:-------------:||:-------------:||:-------------:||:-------------:|
+| ![Home](assets/screenshots/home_screen.png) || ![shimmer](assets/screenshots/shimmer.png) || ![details](assets/screenshots/details_screen.png) || ![wishlist](assets/screenshots/wishlist.png) |
+

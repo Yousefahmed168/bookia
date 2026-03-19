@@ -40,7 +40,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
             if (state is AuthSuccessState) {
               log('success');
             } else if (state is AuthErrorState) {
-              showErrorDialog(context, state.message);
+              showMyDialog(context, state.message);
             } else if (state is AuthLoadingState) {
               showLoadingDialog(context);
             }
