@@ -13,11 +13,6 @@
 
 ## ✨ Key Features & Highlights
 
-### 🌍 Global Localization & RTL
-- Full **Arabic & English** support with correct **RTL (Right-to-Left)** and **LTR** text direction.
-- On-the-fly language switching from the Home Screen with persistent locale saving.
-- Complete UI translation for all major static strings and navigation labels.
-
 ### 🔐 Authentication Flow
 - **Onboarding:** Professionally designed Splash and Welcome screens.
 - **Login/Register:** Complete with validation, social auth buttons, and API integration.
@@ -50,14 +45,14 @@
 ### 🔹 Onboarding & Authentication
 | Splash | Welcome | Login | Register |
 |:---:|:---:|:---:|:---:|
-| <img src="assets\screenshots\splash.png" width="180"/> | <img src="assets\screenshots\welcome.png" width="180"/> | <img src="assets\screenshots\Login.png" width="180"/> | <img src="assets\screenshots\register.png" width="180"/> |
+| <img src="assets\screenshots\splash.png" width="180"/> | <img src="assets\screenshots\welcome.png" width="180"/> | <img src="assets\screenshots\login.png" width="180"/> | <img src="assets\screenshots\register.png" width="180"/> |
 
 | Forgot Password | OTP Verification | New Password | Success |
 |:---:|:---:|:---:|:---:|
 | <img src="assets\screenshots\forgot_password.png" width="180"/> | <img src="assets\screenshots\otp.png" width="180"/> | <img src="assets\screenshots\new_password.png" width="180"/> | <img src="assets\screenshots\success.png" width="180"/> |
 
 ### 🔹 Home, Search & Details
-| Home (English) | Search Results | Book Details |
+| Home  | Search Results | Book Details |
 |:---:|:---:|:---:|
 | <img src="assets\screenshots\home_screen.png" width="220"/> | <img src="assets\screenshots\search.png" width="220"/> | <img src="assets\screenshots\details_screen.png" width="220"/> |
 
