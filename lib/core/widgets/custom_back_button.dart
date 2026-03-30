@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../constants/app_images.dart';
-import '../functions/navigations.dart';
+import '../routes/navigations.dart';
 import 'custom_svg_picture.dart';
 
 class CustomBackButton extends StatelessWidget {

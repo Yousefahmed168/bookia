@@ -10,7 +10,9 @@ abstract class AppImages {
   static const String googleSvg = 'assets/icons/google.svg';
   static const String homeSvg = 'assets/icons/Home.svg';
   static const String appleSvg = 'assets/icons/apple.svg';
+  static const String logoutSvg = 'assets/icons/logout.svg';
   static const String profileSvg = 'assets/icons/Profile.svg';
   static const String searchSvg = 'assets/icons/search-normal.svg';
   static const String loadingJson = 'assets/images/loading.json';
+  static const String cameraSvg = 'assets/icons/camera.svg';
 }

@@ -14,4 +14,11 @@ class Routes {
   static String passwordchanged = '/passwordchanged';
   static String forgetpassword = '/passwordchanged';
   static String details = '/details';
+  static String placeorder = '/placeorder';
+  static String orderSuccess = '/order-success';
+  static String editProfile = '/edit-profile';
+  static const String orderDetails = "/order-details";
+  static const String myOrders = "/my-orders";
+  static const String resetPassword = "/reset-password";
+
 }

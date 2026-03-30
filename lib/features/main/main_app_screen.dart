@@ -1,13 +1,16 @@
-import 'package:bookia/features/wishlist/presentation/page/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/constants/app_images.dart';
 import '../../core/styles/colors.dart';
 import '../../core/widgets/custom_svg_picture.dart';
+import '../cart/presentation/page/cart_screen.dart';
 import '../home/presentation/pages/home_screen.dart';
+import '../profile/profile/presentation/page/profile_screen.dart';
+import '../wishlist/presentation/page/wishlist_screen.dart';
 
 class MainAppScreen extends StatefulWidget {
-  const MainAppScreen({super.key});
+  final int? selectedIndex;
+  const MainAppScreen({super.key, this.selectedIndex});
 
   @override
   State<MainAppScreen> createState() => _MainAppScreenState();
@@ -15,11 +18,20 @@ class MainAppScreen extends StatefulWidget {
 
 class _MainAppScreenState extends State<MainAppScreen> {
   int currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.selectedIndex != null) {
+      currentIndex = widget.selectedIndex!;
+    }
+  }
+
   List<Widget> screens = [
     HomeScreen(),
     WishlistScreen(),
-    Center(child: Text('cart')),
-    Center(child: Text('Profile')),
+    CartScreen(),
+    ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,10 @@
-import 'package:bookia/core/styles/text_styles.dart';
-import 'package:bookia/core/widgets/my_body_view.dart';
-import 'package:bookia/features/wishlist/presentation/cubit/wishlist_cubit.dart';
-import 'package:bookia/features/wishlist/presentation/widgets/wishlist_books.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/styles/text_styles.dart';
+import '../../../../core/widgets/my_body_view.dart';
+import '../cubit/wishlist_cubit.dart';
+import '../widgets/wishlist_books.dart';
 
 class WishlistScreen extends StatelessWidget {
   const WishlistScreen({super.key});
@@ -18,7 +19,7 @@ class WishlistScreen extends StatelessWidget {
       ),
       body: MyBodyView(
         child: BlocProvider(
-          create: (context) => WishlistCubit()..getWishlist(),  
+          create: (context) => WishlistCubit()..getWishlist(),
           child: WishlistBooks(),
         ),
       ),

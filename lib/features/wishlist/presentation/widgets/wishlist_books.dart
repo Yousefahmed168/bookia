@@ -1,9 +1,11 @@
-import 'package:bookia/core/widgets/shimmer/grid_view_shimmer.dart';
-import 'package:bookia/features/home/presentation/widgets/book_card.dart';
-import 'package:bookia/features/wishlist/presentation/cubit/wishlist_cubit.dart';
-import 'package:bookia/features/wishlist/presentation/cubit/wishlist_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/styles/text_styles.dart';
+import '../../../../core/widgets/shimmer/grid_view_shimmer.dart';
+import '../../../home/presentation/widgets/book_card.dart';
+import '../cubit/wishlist_cubit.dart';
+import '../cubit/wishlist_state.dart';
 
 class WishlistBooks extends StatelessWidget {
   const WishlistBooks({super.key});
@@ -16,7 +18,9 @@ class WishlistBooks extends StatelessWidget {
         if (state is WishlistSuccessState) {
           var books = cubit.products;
           if (books.isEmpty) {
-            return const Center(child: Text('No books in wishlist'));
+            return const Center(
+              child: Text('No books in wishlist', style: TextStyles.title),
+            );
           }
           return GridView.builder(
             itemCount: books.length,

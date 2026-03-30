@@ -1,10 +1,13 @@
 import 'dart:developer';
 
-import '../../../../core/routes/routes.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../core/constants/app_images.dart';
-import '../../../../core/functions/navigations.dart';
+import '../../../../core/routes/navigations.dart';
 import '../../../../core/functions/validations.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/styles/colors.dart';
 import '../../../../core/styles/text_styles.dart';
 import '../../../../core/widgets/custom_svg_picture.dart';
@@ -13,9 +16,6 @@ import '../../../../core/widgets/dialog.dart';
 import '../../../../core/widgets/main_button.dart';
 import '../cubit/auth_cubit.dart';
 import '../cubit/auth_state.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({super.key});

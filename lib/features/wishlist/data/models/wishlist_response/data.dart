@@ -1,5 +1,4 @@
-import 'package:bookia/features/home/data/models/best_seller_books_response/product.dart';
-
+import '../../../../home/data/models/best_seller_books_response/product.dart';
 import 'link.dart';
 
 class Data {

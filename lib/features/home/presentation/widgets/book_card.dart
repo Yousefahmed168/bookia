@@ -1,9 +1,9 @@
-import 'package:bookia/core/functions/navigations.dart';
-import 'package:bookia/core/routes/routes.dart';
-import 'package:bookia/core/styles/colors.dart';
-import 'package:bookia/core/styles/text_styles.dart';
-import 'package:bookia/core/widgets/main_button.dart';
-import 'package:bookia/features/home/data/models/best_seller_books_response/product.dart';
+import '../../../../core/routes/navigations.dart';
+import '../../../../core/routes/routes.dart';
+import '../../../../core/styles/colors.dart';
+import '../../../../core/styles/text_styles.dart';
+import '../../../../core/widgets/main_button.dart';
+import '../../data/models/best_seller_books_response/product.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 

@@ -15,7 +15,9 @@ class AuthRepo {
         endpoint: Apis.register,
         data: params.toJson(),
       );
-      if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
+      if (response.statusCode != null &&
+          response.statusCode! >= 200 &&
+          response.statusCode! < 300) {
         var data = AuthResponse.fromJson(response.data);
         await SharedPref.setToken(data.data?.token ?? '');
         await SharedPref.setUserInfo(data.data?.user);
@@ -35,7 +37,9 @@ class AuthRepo {
         endpoint: Apis.login,
         data: params.toJson(),
       );
-      if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
+      if (response.statusCode != null &&
+          response.statusCode! >= 200 &&
+          response.statusCode! < 300) {
         var data = AuthResponse.fromJson(response.data);
         await SharedPref.setToken(data.data?.token ?? '');
         await SharedPref.setUserInfo(data.data?.user);
@@ -55,7 +59,9 @@ class AuthRepo {
         endpoint: Apis.forgetpassword,
         data: params.toJson(),
       );
-      if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
+      if (response.statusCode != null &&
+          response.statusCode! >= 200 &&
+          response.statusCode! < 300) {
         return AuthResponse.fromJson(response.data);
       } else if (response.statusCode == 500) {
         return null;
@@ -74,7 +80,9 @@ class AuthRepo {
         data: params.toJson(),
       );
 
-      if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
+      if (response.statusCode != null &&
+          response.statusCode! >= 200 &&
+          response.statusCode! < 300) {
         return Otpcode.fromJson(response.data);
       }
 
@@ -96,7 +104,9 @@ class AuthRepo {
         data: params.toJson(),
       );
 
-      if (response.statusCode != null && response.statusCode! >= 200 && response.statusCode! < 300) {
+      if (response.statusCode != null &&
+          response.statusCode! >= 200 &&
+          response.statusCode! < 300) {
         return Otpcode.fromJson(response.data);
       }
 

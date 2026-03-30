@@ -1,7 +1,7 @@
-import 'package:bookia/core/services/dio/apis.dart';
-import 'package:bookia/core/services/dio/dio_provider.dart';
-import 'package:bookia/core/services/local/shared_pref.dart';
-import 'package:bookia/features/wishlist/data/models/wishlist_response/wishlist_response.dart';
+import '../../../../core/services/dio/apis.dart';
+import '../../../../core/services/dio/dio_provider.dart';
+import '../../../../core/services/local/shared_pref.dart';
+import '../models/wishlist_response/wishlist_response.dart';
 
 class WishlistRepo {
   static Future<WishlistResponse?> getWishlist() async {

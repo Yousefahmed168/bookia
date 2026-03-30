@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../core/constants/app_images.dart';
-import '../../../../core/functions/navigations.dart';
+import '../../../../core/routes/navigations.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/styles/colors.dart';
 import '../../../../core/styles/text_styles.dart';
@@ -78,7 +78,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
                       text: 'Reset Password',
                       textColor: AppColors.backgroundColor,
                       onPressed: () {
-                        pushTo(context,  Routes.passwordchanged);
+                        pushTo(context, Routes.passwordchanged);
                         cubit.resetpassword();
                       },
                     ),

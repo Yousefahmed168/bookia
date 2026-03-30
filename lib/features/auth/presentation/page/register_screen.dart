@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../core/constants/app_images.dart';
-import '../../../../core/functions/navigations.dart';
+import '../../../../core/routes/navigations.dart';
 import '../../../../core/functions/validations.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/styles/colors.dart';
@@ -43,7 +43,7 @@ class RegisterScreen extends StatelessWidget {
             children: [
               Text("Already have an account?  ", style: TextStyles.body),
               GestureDetector(
-                onTap: () => pushTo(context,  Routes.loginscreen),
+                onTap: () => pushTo(context, Routes.loginscreen),
                 child: Text(
                   "Login Now",
                   style: TextStyles.body.copyWith(

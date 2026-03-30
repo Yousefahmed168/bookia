@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import '../../core/constants/app_images.dart';
-import '../../core/functions/navigations.dart';
+import '../../core/routes/navigations.dart';
 import '../../core/routes/routes.dart' show Routes;
 import '../../core/styles/colors.dart';
 import '../../core/styles/text_styles.dart';

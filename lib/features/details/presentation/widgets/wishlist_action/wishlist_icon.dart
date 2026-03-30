@@ -1,13 +1,14 @@
-import 'package:bookia/core/constants/app_images.dart';
-import 'package:bookia/core/functions/navigations.dart';
-import 'package:bookia/core/styles/colors.dart';
-import 'package:bookia/core/widgets/custom_svg_picture.dart';
-import 'package:bookia/core/widgets/dialog.dart';
-import 'package:bookia/features/details/presentation/cubit/wishlist_action_cubit.dart';
-import 'package:bookia/features/details/presentation/cubit/wishlist_icon_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../../core/constants/app_images.dart';
+import '../../../../../core/routes/navigations.dart';
+import '../../../../../core/styles/colors.dart';
+import '../../../../../core/widgets/custom_svg_picture.dart';
+import '../../../../../core/widgets/dialog.dart';
+import 'cubit/wishlist_action_cubit.dart';
+import 'cubit/wishlist_icon_state.dart';
 
 class WishlistActionWidget extends StatelessWidget {
   const WishlistActionWidget({super.key, required this.id});
@@ -18,15 +19,15 @@ class WishlistActionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => WishlistActionCubit(),
-      child: BlocConsumer<WishlistActionCubit, DetailsState>(
+      child: BlocConsumer<WishlistActionCubit, WishlistActionState>(
         listener: (context, state) {
-          if (state is DetailsSuccessState) {
+          if (state is WishlistActionSuccessState) {
             pop(context);
             showMyDialog(context, state.msg, type: DialogType.success);
-          } else if (state is DetailsErrorState) {
+          } else if (state is WishlistActionErrorState) {
             pop(context);
             showMyDialog(context, 'Something went wrong');
-          } else if (state is DetailsLoadingState) {
+          } else if (state is WishlistActionLoadingState) {
             showLoadingDialog(context);
           }
         },

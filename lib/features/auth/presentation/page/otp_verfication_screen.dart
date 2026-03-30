@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../../../core/constants/app_images.dart';
-import '../../../../core/functions/navigations.dart';
+import '../../../../core/routes/navigations.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/styles/colors.dart';
 import '../../../../core/styles/text_styles.dart';
@@ -76,7 +76,7 @@ class OtpVerficationScreen extends StatelessWidget {
                       text: 'Verify ',
                       textColor: AppColors.backgroundColor,
                       onPressed: () {
-                        pushReplacement(context,  Routes.createnewpassword);
+                        pushReplacement(context, Routes.createnewpassword);
                         cubit.otpcode();
                       },
                     ),
@@ -94,7 +94,7 @@ class OtpVerficationScreen extends StatelessWidget {
             children: [
               Text("Didn’t received code?   ", style: TextStyles.body),
               GestureDetector(
-                onTap: () => pushTo(context,  Routes.forgetpassword),
+                onTap: () => pushTo(context, Routes.forgetpassword),
                 child: Text(
                   "Resend",
                   style: TextStyles.body.copyWith(
