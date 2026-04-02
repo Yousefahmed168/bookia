@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:bookia/core/styles/colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_back_button.dart';
@@ -60,7 +61,7 @@ class _SearchBodyState extends State<_SearchBody> {
                   Expanded(
                     child: CustomTextFormField(
                       controller: _searchController,
-                      hintText: 'Search Store',
+                      hintText: 'search_hint'.tr(),
                       prefixIcon: const Icon(
                         Icons.search,
                         color: AppColors.darkColor,
@@ -81,7 +82,7 @@ class _SearchBodyState extends State<_SearchBody> {
                     if (state is SearchInitial) {
                       return Center(
                         child: Text(
-                          'Search for a book...',
+                          'search_for_book'.tr(),
                           style: TextStyles.subtitle1.copyWith(
                             color: AppColors.darkColor,
                           ),
@@ -91,7 +92,7 @@ class _SearchBodyState extends State<_SearchBody> {
                     if (state is SearchEmptyState) {
                       return Center(
                         child: Text(
-                          'No books found',
+                          'no_books_found'.tr(),
                           style: TextStyles.subtitle1.copyWith(
                             color: AppColors.darkColor,
                           ),

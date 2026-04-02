@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import '../../core/routes/routes.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -43,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             CustomSvgPicture(path: AppImages.logoSvg, width: 250),
             Gap(10),
-            Text('Order Your Book Now!', style: TextStyles.subtitle2),
+            Text('order_now'.tr(), style: TextStyles.subtitle2),
           ],
         ),
       ),

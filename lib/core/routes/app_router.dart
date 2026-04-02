@@ -1,3 +1,7 @@
+import 'package:bookia/features/contact_us/presentation/cubit/contact_us_cubit.dart';
+import 'package:bookia/features/contact_us/presentation/page/contact_us_screen.dart';
+import 'package:bookia/features/faq/presentation/cubit/faq_cubit.dart';
+import 'package:bookia/features/faq/presentation/page/faq_screen.dart';
 import 'package:bookia/features/orders/my_orders/presentation/cubit/my_order_cubit.dart';
 import 'package:bookia/features/orders/my_orders/presentation/screens/my_orders_screen.dart';
 import 'package:bookia/features/orders/order_details/presentation/cubit/order_details_cubit.dart';
@@ -124,6 +128,20 @@ class AppRouter {
         builder: (context, state) => BlocProvider(
           create: (context) => ResetPasswordCubit(),
           child: const ResetPasswordScreen(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.faq,
+        builder: (context, state) => BlocProvider(
+          create: (context) => FaqCubit(),
+          child: const FaqScreen(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.contactUs,
+        builder: (context, state) => BlocProvider(
+          create: (context) => ContactUsCubit(),
+          child: const ContactUsScreen(),
         ),
       ),
     ],

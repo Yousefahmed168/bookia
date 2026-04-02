@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:bookia/core/routes/navigations.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_back_button.dart';
@@ -88,7 +89,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           }
 
           if (state is OrderDetailsError && order == null) {
-            return const Center(child: Text("Failed to load order details"));
+            return Center(child: Text("failed_load_order_details".tr()));
           }
 
           if (order == null) {
@@ -117,7 +118,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
-        child: MainButton(text: "My Orders", onPressed: () => pop(context)),
+        child: MainButton(text: "my_orders".tr(), onPressed: () => pop(context)),
       ),
     );
   }

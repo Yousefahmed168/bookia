@@ -37,10 +37,25 @@
 - **Identity:** Edit personal info (Name, Phone, Address) and upload a profile picture.
 - **Security:** In-app reset password functionality.
 - **Session Management:** Secure token-based logout with cleared local cache.
+- **Support:** Integrated **FAQ** and **Contact Us** forms for user assistance.
+
+### 🌍 Localization & Multi-Language
+- **Full RTL Support:** Seamless transitions between Arabic and English.
+- **Dynamic Translations:** All UI strings, hints, and error messages are localized using `easy_localization`.
+- **Locale Persistence:** The app remembers the user's language preference across sessions.
+
 
 ---
 
 ## 📱 Screenshots Preview
+
+### 🧩 App Identity
+
+|                    App Icon                   |
+| :-------------------------------------------: |
+| <img src="assets\screenshots\icon.png" width="100"/> |
+
+---
 
 ### 🔹 Onboarding & Authentication
 | Splash | Welcome | Login | Register |
@@ -67,6 +82,15 @@
 | <img src="assets\screenshots\profile.png" width="180"/> | <img src="assets\screenshots\edit_profile.png" width="180"/> | <img src="assets\screenshots\my_order.png" width="180"/> | <img src="assets\screenshots\order_details.png" width="180"/> |
 
 ---
+### ℹ️ Help & Support
+
+|                      FAQ                     |                     Contact Us                     |
+| :------------------------------------------: | :------------------------------------------------: |
+| <img src="assets/screenshots/faq.png" width="180"/> | <img src="assets/screenshots/contact_us.png" width="180"/> |
+
+💡 *Support system to enhance user trust and experience.*
+
+---
 
 ## 🛠 Tech Stack & Packages
 
@@ -80,7 +104,8 @@
   - [Carousel Slider](https://pub.dev/packages/carousel_slider) & [Smooth Page Indicator](https://pub.dev/packages/smooth_page_indicator).
   - [Cached Network Image](https://pub.dev/packages/cached_network_image) for optimized image loading.
   - [Pinput](https://pub.dev/packages/pinput) for smooth OTP inputs.
-
+  - [Easy Localization](https://pub.dev/packages/easy_localization) for multi-language support.
+  
 ---
 
 ## 🏗 Project Architecture
@@ -89,8 +114,7 @@ The app follows a professionally structured **Feature-Based Architecture**, ensu
 
 ```text
     lib/
-    ├── app_root/
-    │   └── app_root.dart           # App-level config (Routes, Themes, Locales)
+    ├── app.dart           # App-level config (Routes, Themes, Locales)
     ├── core/
     │   ├── constants/              # Fonts, Images, Strings
     │   ├── cubits/                 # Global Cubits (AppCubit)
@@ -105,6 +129,7 @@ The app follows a professionally structured **Feature-Based Architecture**, ensu
     │   ├── cart/                   # Shopping Cart logic
     │   ├── wish_list/              # Managed favorites
     │   ├── profile_folder/         # User management components
+    │   ├── support/                # FAQ and Contact Us forms
     │   └── welcome/                # Onboarding flow
     └── main.dart                   # Entry point
 ```

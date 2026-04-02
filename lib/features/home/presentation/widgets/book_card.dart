@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import '../../../../core/routes/navigations.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/styles/colors.dart';
@@ -85,7 +86,7 @@ class BookCard extends StatelessWidget {
                           minWidth: 70,
                           minHeight: 30,
                           bgColor: AppColors.darkColor,
-                          text: 'Buy',
+                          text: 'buy'.tr(),
                           onPressed: () {},
                         ),
                       ),

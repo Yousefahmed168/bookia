@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -48,12 +49,12 @@ class _SignUpView extends StatelessWidget {
                         ),
                         const Gap(35),
                         Text(
-                          'Password Changed ',
+                          'password_changed_title'.tr(),
                           style: TextStyles.title.copyWith(fontSize: 26),
                         ),
                         const Gap(3),
                         Text(
-                          'Your password has been changed\n successfully.',
+                          'password_changed_desc'.tr(),
                           textAlign: TextAlign.center,
                           style: TextStyles.body.copyWith(
                             color: AppColors.darkGreyColor,
@@ -61,7 +62,7 @@ class _SignUpView extends StatelessWidget {
                         ),
                         const Gap(40),
                         MainButton(
-                          text: "Back to Login",
+                          text: "back_to_login".tr(),
                           onPressed: () {
                             pushTo(context, Routes.loginscreen);
                           },

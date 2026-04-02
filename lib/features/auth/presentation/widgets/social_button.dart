@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -17,7 +18,7 @@ class SocialLoginButtons extends StatelessWidget {
           children: [
             Expanded(child: Divider()),
             Gap(20),
-            Text('OR', style: TextStyles.caption1),
+            Text('or'.tr(), style: TextStyles.caption1),
             Gap(20),
             Expanded(child: Divider()),
           ],
@@ -25,13 +26,13 @@ class SocialLoginButtons extends StatelessWidget {
         Gap(15),
         SocialButton(
           path: AppImages.googleSvg,
-          text: 'Continue with Google',
+          text: 'google_auth'.tr(),
           onTap: () {},
         ),
         Gap(15),
         SocialButton(
           path: AppImages.appleSvg,
-          text: 'Continue with Apple',
+          text: 'apple_auth'.tr(),
           onTap: () {},
         ),
       ],

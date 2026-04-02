@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -34,10 +35,10 @@ class WelcomeScreen extends StatelessWidget {
                 Spacer(flex: 2),
                 CustomSvgPicture(path: AppImages.logoSvg),
                 Gap(15),
-                Text('Order Your Book Now!', style: TextStyles.subtitle1),
+                Text('order_now'.tr(), style: TextStyles.subtitle1),
                 Spacer(flex: 4),
                 MainButton(
-                  text: 'Login',
+                  text: 'login'.tr(),
                   onPressed: () {
                     pushTo(context, Routes.loginscreen);
                   },
@@ -47,7 +48,7 @@ class WelcomeScreen extends StatelessWidget {
                   bgColor: AppColors.backgroundColor,
                   textColor: AppColors.darkColor,
                   borderColor: AppColors.darkColor,
-                  text: 'Register',
+                  text: 'register'.tr(),
                   onPressed: () {
                     pushTo(context, Routes.registerscreen);
                   },

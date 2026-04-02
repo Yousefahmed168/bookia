@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:bookia/core/styles/colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class OrderItem extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Text("OrderNo $orderNumber", style: TextStyles.body),
+                  child: Text("order_no".tr(args: [orderNumber]), style: TextStyles.body),
                 ),
                 Text(
                   date,
@@ -50,7 +51,7 @@ class OrderItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  'Total Amount: ',
+                  'total_amount'.tr(),
                   style: TextStyles.body.copyWith(color: AppColors.greyColor),
                 ),
                 Text(totalAmount, style: TextStyles.body),

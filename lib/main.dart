@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'app.dart';
@@ -8,5 +9,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioProvider.init();
   await SharedPref.init();
-  runApp(const MainApp());
+  await EasyLocalization.ensureInitialized();
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      path: 'assets/translation',
+      fallbackLocale: const Locale('en'),
+      child: const MainApp(),
+    ),
+  );
 }
+

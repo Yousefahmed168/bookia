@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -55,17 +56,17 @@ class ForgetPasswordScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Forgot Password?', style: TextStyles.headline),
+                    Text('forgot_password_title'.tr(), style: TextStyles.headline),
                     Gap(10),
                     Text(
-                      'Dont worry! It occurs. Please enter the email address linked with your account.',
+                      'forgot_password_desc'.tr(),
                       style: TextStyles.body.copyWith(
                         color: AppColors.darkGreyColor,
                       ),
                     ),
                     Gap(30),
                     CustomTextFormField(
-                      hintText: 'Enter your email',
+                      hintText: 'email_hint'.tr(),
                       controller: cubit.emailController,
                       validator: (input) {
                         if (input!.isEmpty) {
@@ -80,7 +81,7 @@ class ForgetPasswordScreen extends StatelessWidget {
 
                     MainButton(
                       bgColor: AppColors.primaryColor,
-                      text: 'Send Code ',
+                      text: 'send_code'.tr(),
                       textColor: AppColors.backgroundColor,
                       onPressed: () {
                         pushTo(context, Routes.otpverfication);
@@ -102,11 +103,11 @@ class ForgetPasswordScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Remember Password? ", style: TextStyles.body),
+              Text("remember_password".tr(), style: TextStyles.body),
               GestureDetector(
                 onTap: () => pushTo(context, Routes.loginscreen),
                 child: Text(
-                  "Login",
+                  "login".tr(),
                   style: TextStyles.body.copyWith(
                     color: AppColors.primaryColor,
                   ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -71,7 +72,7 @@ class DetailsScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('${model.price} \$', style: TextStyles.title),
+            Text('${model.price} ${'currency'.tr()}', style: TextStyles.title),
             CartActionWidget(id: model.id ?? 0),
           ],
         ),

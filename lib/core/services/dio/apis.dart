@@ -27,6 +27,7 @@ abstract class Apis {
 
   // place order
   static const governorates = '/governorates';
+  static const placeOrder = '/place-order';
 
   // profile
   static const profile = '/profile';
@@ -39,4 +40,10 @@ abstract class Apis {
 
   // reset password
   static const String updatePassword = "/update-password";
+
+  // faq
+  static const String faqs = "/faqs";
+
+  // contact us
+  static const String contactUs = "/contact-us";
 }

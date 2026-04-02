@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,8 +19,8 @@ class WishlistBooks extends StatelessWidget {
         if (state is WishlistSuccessState) {
           var books = cubit.products;
           if (books.isEmpty) {
-            return const Center(
-              child: Text('No books in wishlist', style: TextStyles.title),
+            return Center(
+              child: Text('no_books_wishlist'.tr(), style: TextStyles.title),
             );
           }
           return GridView.builder(

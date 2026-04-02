@@ -7,6 +7,7 @@ import '../../../../core/widgets/shimmer/list_view_shimmer.dart';
 import '../cubit/cart_cubit.dart';
 import '../cubit/cart_state.dart';
 import 'cart_item_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,7 +26,7 @@ class CartBooks extends StatelessWidget {
           pushTo(context, Routes.placeorder, extra: cubit.total);
         } else if (state is CheckoutErrorState) {
           Navigator.pop(context); // Close loading dialog
-          showMyDialog(context, 'Failed to checkout. Please try again.');
+          showMyDialog(context, 'failed_checkout'.tr());
         }
       },
       buildWhen: (_, state) =>
@@ -36,7 +37,9 @@ class CartBooks extends StatelessWidget {
         if (state is CartSuccessState) {
           var cubit = context.read<CartCubit>();
           if (cubit.products.isEmpty) {
-            return const Center(child: Text('No books in cart'));
+            return Center(
+              child: Text('no_books_cart'.tr(), style: TextStyles.title),
+            );
           }
           return Column(
             children: [
@@ -62,7 +65,7 @@ class CartBooks extends StatelessWidget {
               Row(
                 children: [
                   const Spacer(),
-                  Text('Total: ${cubit.total}', style: TextStyles.subtitle2),
+                  Text('total_with_value'.tr(args: [cubit.total.toString()]), style: TextStyles.subtitle2),
                 ],
               ),
               Padding(
@@ -71,7 +74,7 @@ class CartBooks extends StatelessWidget {
                   onPressed: () {
                     cubit.checkout();
                   },
-                  text: 'Checkout',
+                  text: 'checkout'.tr(),
                 ),
               ),
             ],

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/routes/navigations.dart';
@@ -35,7 +36,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           pop(context);
         } else if (state is EditProfileError) {
           pop(context);
-          showMyDialog(context, 'Failed to update profile. Please try again.');
+          showMyDialog(context, 'failed_update_profile'.tr());
         } else if (state is EditProfileLoading) {
           showLoadingDialog(context);
         }
@@ -43,7 +44,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       builder: (context, state) {
         var cubit = context.read<EditProfileCubit>();
         return Scaffold(
-          appBar: AppBar(title: const Text('Edit Profile')),
+          appBar: AppBar(title: Text('edit_profile'.tr())),
           body: MyBodyView(
             child: Column(
               children: [
@@ -105,10 +106,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 const Gap(50),
                 CustomTextFormField(
                   controller: cubit.nameController,
-                  hintText: 'Name',
+                  hintText: 'name'.tr(),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your name';
+                      return 'please_enter_name'.tr();
                     }
                     return null;
                   },
@@ -116,12 +117,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 const Gap(12),
                 CustomTextFormField(
                   controller: cubit.phoneController,
-                  hintText: 'Phone',
+                  hintText: 'phone'.tr(),
                   validator: (value) {
                     if (value != null &&
                         value.isNotEmpty == true &&
                         !isEgyptianPhone(value)) {
-                      return 'Please enter a valid Egyptian phone number';
+                      return 'invalid_phone'.tr();
                     }
                     return null;
                   },
@@ -129,7 +130,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 const Gap(12),
                 CustomTextFormField(
                   controller: cubit.addressController,
-                  hintText: 'Address',
+                  hintText: 'address'.tr(),
                 ),
               ],
             ),
@@ -137,7 +138,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(20),
             child: MainButton(
-              text: 'Save',
+              text: 'save'.tr(),
               onPressed: () {
                 if (path.isNotEmpty) {
                   cubit.updateProfile(File(path));
@@ -161,12 +162,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           children: [
             ListTile(
               leading: const Icon(Icons.photo_library),
-              title: const Text('Gallery'),
+              title: Text('gallery'.tr()),
               onTap: () => Navigator.of(context).pop(ImageSource.gallery),
             ),
             ListTile(
               leading: const Icon(Icons.camera_alt),
-              title: const Text('Camera'),
+              title: Text('camera'.tr()),
               onTap: () => Navigator.of(context).pop(ImageSource.camera),
             ),
           ],

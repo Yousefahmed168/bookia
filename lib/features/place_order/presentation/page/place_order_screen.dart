@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import '../../../../core/routes/navigations.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/styles/text_styles.dart';
@@ -5,6 +6,8 @@ import '../../../../core/widgets/custom_back_button.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/widgets/main_button.dart';
 import '../../../../core/widgets/my_body_view.dart';
+import '../../../../core/widgets/dialog.dart';
+import '../../../cart/presentation/cubit/cart_cubit.dart';
 import '../cubit/place_order_cubit.dart';
 import '../cubit/place_order_state.dart';
 import '../widgets/gov_bottom_sheet.dart';
@@ -28,6 +31,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
   final _addressController = TextEditingController();
   final _phoneController = TextEditingController();
   final _governorateController = TextEditingController();
+  int? _selectedGovernorateId;
 
   @override
   void dispose() {
@@ -55,21 +59,21 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Place Your Order', style: TextStyles.headline),
+                  Text('place_your_order'.tr(), style: TextStyles.headline),
                   const Gap(10),
                   Text(
-                    'Don\'t worry! It occurs. Please enter the email address linked with your account.',
+                    'forgot_password_desc'.tr(),
                     style: TextStyles.body.copyWith(color: Colors.grey),
                   ),
                   const Gap(28),
                   CustomTextFormField(
                     controller: _fullNameController,
-                    hintText: 'Full Name',
+                    hintText: 'fullname'.tr(),
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your full name';
+                        return 'please_enter_full_name'.tr();
                       }
                       return null;
                     },
@@ -77,15 +81,15 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                   const Gap(16),
                   CustomTextFormField(
                     controller: _emailController,
-                    hintText: 'Email',
+                    hintText: 'email'.tr(),
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
+                        return 'please_enter_email'.tr();
                       }
                       if (!value.contains('@')) {
-                        return 'Please enter a valid email';
+                        return 'invalid_email'.tr();
                       }
                       return null;
                     },
@@ -93,12 +97,12 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                   const Gap(16),
                   CustomTextFormField(
                     controller: _addressController,
-                    hintText: 'Address',
+                    hintText: 'address'.tr(),
                     keyboardType: TextInputType.streetAddress,
                     textInputAction: TextInputAction.next,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your address';
+                        return 'please_enter_address'.tr();
                       }
                       return null;
                     },
@@ -106,12 +110,12 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                   const Gap(16),
                   CustomTextFormField(
                     controller: _phoneController,
-                    hintText: 'Phone',
+                    hintText: 'phone'.tr(),
                     keyboardType: TextInputType.phone,
                     textInputAction: TextInputAction.done,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your phone number';
+                        return 'please_enter_phone'.tr();
                       }
                       return null;
                     },
@@ -121,7 +125,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                     builder: (context, state) {
                       return CustomTextFormField(
                         controller: _governorateController,
-                        hintText: 'Governorate',
+                        hintText: 'governorate'.tr(),
                         readOnly: true,
                         onTap: () {
                           if (state is GovernoratesSuccessState) {
@@ -133,6 +137,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                                 setState(() {
                                   _governorateController.text =
                                       selectedGov.governorateNameEn ?? '';
+                                  _selectedGovernorateId = selectedGov.id;
                                 });
                               },
                             );
@@ -140,7 +145,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                         },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please select a governorate';
+                            return 'please_select_gov'.tr();
                           }
                           return null;
                         },
@@ -151,19 +156,48 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                   const Gap(32),
                   Row(
                     children: [
-                      Text('Total:', style: TextStyles.subtitle1),
+                      Text('total_with_colon'.tr(), style: TextStyles.subtitle1),
                       const Spacer(),
                       Text('\$ ${widget.total}', style: TextStyles.subtitle1),
                     ],
                   ),
                   const Gap(16),
-                  MainButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
+                  BlocConsumer<PlaceOrderCubit, PlaceOrderState>(
+                    listener: (context, state) {
+                      if (state is PlaceOrderLoading) {
+                        showLoadingDialog(context);
+                      } else if (state is PlaceOrderSuccess) {
+                        Navigator.pop(context); // close loading
+                        // refresh cart
+                        context.read<CartCubit>().getCart();
                         pushTo(context, Routes.orderSuccess);
+                      } else if (state is PlaceOrderError) {
+                        Navigator.pop(context); // close loading
+                        showMyDialog(context, state.message);
                       }
                     },
-                    text: 'Submit Order',
+                    builder: (context, state) {
+                      return MainButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate() &&
+                              _selectedGovernorateId != null) {
+                            context.read<PlaceOrderCubit>().placeOrder(
+                                  name: _fullNameController.text,
+                                  email: _emailController.text,
+                                  phone: _phoneController.text,
+                                  address: _addressController.text,
+                                  governorateId: _selectedGovernorateId!,
+                                );
+                          } else if (_selectedGovernorateId == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content: Text('please_select_gov'.tr())),
+                            );
+                          }
+                        },
+                        text: 'submit_order'.tr(),
+                      );
+                    },
                   ),
                   const Gap(20),
                 ],

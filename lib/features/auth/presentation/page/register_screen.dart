@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -41,11 +42,11 @@ class RegisterScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Already have an account?  ", style: TextStyles.body),
+              Text("already_have_account".tr(), style: TextStyles.body),
               GestureDetector(
                 onTap: () => pushTo(context, Routes.loginscreen),
                 child: Text(
-                  "Login Now",
+                  "login_now".tr(),
                   style: TextStyles.body.copyWith(
                     color: AppColors.primaryColor,
                   ),
@@ -78,7 +79,7 @@ class RegisterScreen extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  "Hello! Register to get started",
+                  "hello".tr(),
                   style: TextStyles.headline.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -86,7 +87,7 @@ class RegisterScreen extends StatelessWidget {
                 Gap(30),
                 CustomTextFormField(
                   controller: cubit.usernameController,
-                  hintText: 'Username',
+                  hintText: 'username_hint'.tr(),
                   keyboardType: TextInputType.text,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -99,7 +100,7 @@ class RegisterScreen extends StatelessWidget {
 
                 CustomTextFormField(
                   controller: cubit.emailController,
-                  hintText: 'Email',
+                  hintText: 'email_hint'.tr(),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -113,7 +114,7 @@ class RegisterScreen extends StatelessWidget {
                 Gap(15),
                 PasswordTextFormField(
                   controller: cubit.passwordController,
-                  hintText: 'Password',
+                  hintText: 'password_hint'.tr(),
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Please enter your password';
@@ -124,7 +125,7 @@ class RegisterScreen extends StatelessWidget {
                 Gap(15),
                 PasswordTextFormField(
                   controller: cubit.passwordConfirmationController,
-                  hintText: 'Confirmation password',
+                  hintText: 'confirm_password'.tr(),
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Please enter your confirmation password';
@@ -136,7 +137,7 @@ class RegisterScreen extends StatelessWidget {
                 Gap(30),
 
                 MainButton(
-                  text: 'Register',
+                  text: 'register'.tr(),
                   onPressed: () {
                     if (cubit.formKey.currentState!.validate()) {
                       cubit.register();

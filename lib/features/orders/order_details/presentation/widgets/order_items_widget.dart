@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:bookia/core/styles/colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/features/orders/order_details/data/models/order_details_response/order_product.dart';
@@ -14,7 +15,7 @@ class OrderItemsWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("Order Items", style: TextStyles.body),
+        Text("order_items".tr(), style: TextStyles.body),
         const Gap(12),
         ...List.generate(products.length, (index) {
           final item = products[index];
@@ -35,7 +36,7 @@ class OrderItemsWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Qty: ${item.orderProductQuantity ?? 0}",
+                      "qty".tr(args: [item.orderProductQuantity?.toString() ?? "0"]),
                       style: TextStyles.caption2.copyWith(
                         color: AppColors.greyColor,
                       ),

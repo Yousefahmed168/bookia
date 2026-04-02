@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:bookia/core/routes/navigations.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_back_button.dart';
@@ -47,21 +48,21 @@ class ResetPasswordScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("New Password", style: TextStyles.headline),
+                  Text("new_password".tr(), style: TextStyles.headline),
                   const Gap(73),
                   PasswordTextFormField(
                     controller: cubit.currentPasswordController,
-                    hintText: 'Enter your password',
+                    hintText: 'enter_password'.tr(),
                   ),
                   const Gap(26),
                   PasswordTextFormField(
                     controller: cubit.newPasswordController,
-                    hintText: 'Enter your password',
+                    hintText: 'enter_password'.tr(),
                   ),
                   const Gap(26),
                   PasswordTextFormField(
                     controller: cubit.confirmPasswordController,
-                    hintText: 'Enter your password',
+                    hintText: 'enter_password'.tr(),
                   ),
                 ],
               ),
@@ -72,7 +73,7 @@ class ResetPasswordScreen extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20),
         child: MainButton(
-          text: "Update Password",
+          text: "update_password".tr(),
           onPressed: () {
             if (cubit.formKey.currentState!.validate()) {
               cubit.updatePassword();

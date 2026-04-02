@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -53,10 +54,10 @@ class OtpVerficationScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('OTP Verification', style: TextStyles.headline),
+                    Text('otp_verification'.tr(), style: TextStyles.headline),
                     Gap(10),
                     Text(
-                      'Enter the verification code we just sent on your email address.',
+                      'otp_desc'.tr(),
                       style: TextStyles.body.copyWith(
                         color: AppColors.darkGreyColor,
                       ),
@@ -73,7 +74,7 @@ class OtpVerficationScreen extends StatelessWidget {
                     MainButton(
                       bgColor: AppColors.primaryColor,
 
-                      text: 'Verify ',
+                      text: 'verify'.tr(),
                       textColor: AppColors.backgroundColor,
                       onPressed: () {
                         pushReplacement(context, Routes.createnewpassword);
@@ -92,11 +93,11 @@ class OtpVerficationScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Didn’t received code?   ", style: TextStyles.body),
+              Text("didnt_receive_code".tr(), style: TextStyles.body),
               GestureDetector(
                 onTap: () => pushTo(context, Routes.forgetpassword),
                 child: Text(
-                  "Resend",
+                  "resend".tr(),
                   style: TextStyles.body.copyWith(
                     color: AppColors.primaryColor,
                   ),

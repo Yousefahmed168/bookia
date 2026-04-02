@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -53,29 +54,29 @@ class CreateNewPasswordScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Create new password', style: TextStyles.headline),
+                    Text('create_new_password'.tr(), style: TextStyles.headline),
                     Gap(10),
 
                     Text(
-                      'Your new password must be unique from those previously used.',
+                      'new_password_desc'.tr(),
                       style: TextStyles.body.copyWith(
                         color: AppColors.darkGreyColor,
                       ),
                     ),
                     Gap(32),
                     PasswordTextFormField(
-                      hintText: 'New Password',
+                      hintText: 'new_password'.tr(),
                       controller: cubit.passwordController,
                     ),
                     Gap(11),
                     PasswordTextFormField(
-                      hintText: 'Confirm password',
+                      hintText: 'confirm_password'.tr(),
                       controller: cubit.passwordConfirmationController,
                     ),
                     Gap(50),
                     MainButton(
                       bgColor: AppColors.primaryColor,
-                      text: 'Reset Password',
+                      text: 'reset_password'.tr(),
                       textColor: AppColors.backgroundColor,
                       onPressed: () {
                         pushTo(context, Routes.passwordchanged);

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/routes/navigations.dart';
 import 'package:bookia/core/routes/routes.dart';
@@ -30,7 +31,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My Orders", style: TextStyles.subtitle1),
+        title: Text("my_orders".tr(), style: TextStyles.subtitle1),
         centerTitle: true,
         automaticallyImplyLeading: false,
         leading: IconButton(
@@ -54,7 +55,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
           var orders = cubit.myOrdersResponse?.data?.orders;
 
           if (orders != null && orders.isEmpty) {
-            return const Center(child: Text("No Orders Found."));
+            return Center(child: Text("no_orders_found".tr()));
           }
 
           if (orders != null) {

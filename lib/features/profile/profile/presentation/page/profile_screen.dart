@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:bookia/core/constants/app_images.dart';
 import 'package:bookia/core/routes/navigations.dart';
 import 'package:bookia/core/services/local/shared_pref.dart';
@@ -48,101 +49,117 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Navigator.pop(context);
             ScaffoldMessenger.of(
               context,
-            ).showSnackBar(const SnackBar(content: Text('Failed to logout')));
+            ).showSnackBar(SnackBar(content: Text('failed_logout'.tr())));
           }
         },
 
         child: Builder(
           builder: (context) => Scaffold(
             backgroundColor: AppColors.backgroundColor,
-          appBar: AppBar(
-            centerTitle: true,
-            automaticallyImplyLeading: false,
-            title: const Text('Profile', style: TextStyles.title),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  context.read<EditProfileCubit>().logout();
-                },
-                icon: CustomSvgPicture(path: AppImages.logoutSvg),
-              ),
-            ],
-          ),
-          body: MyBodyView(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: CachedNetworkImage(
-                        imageUrl: profileData?.image ?? '',
-                        height: 100,
-                        width: 100,
-                        progressIndicatorBuilder:
-                            (context, url, downloadProgress) =>
-                                const CircularProgressIndicator(),
-                        errorWidget: (context, url, error) => const Icon(
-                          Icons.person,
-                          size: 100,
-                          color: AppColors.primaryColor,
-                        ),
-                      ),
-                    ),
-                    Gap(20),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          profileData?.name ?? '',
-                          style: TextStyles.subtitle1,
-                        ),
-                        Text(
-                          profileData?.email ?? '',
-                          style: TextStyles.body.copyWith(
-                            color: AppColors.darkGreyColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 32),
-                Expanded(
-                  child: Builder(
-                    builder: (context) {
-                      return ListView(
-                        children: [
-                          ProfileItem(
-                            title: 'My Orders',
-                            onTap: () => pushTo(context, Routes.myOrders),
-                          ),
-                          ProfileItem(
-                            title: 'Edit Profile',
-                            onTap: () {
-                              pushTo(context, Routes.editProfile).then((value) {
-                                setState(() {});
-                              });
-                            },
-                          ),
-                          ProfileItem(
-                            title: 'Reset Password',
-                            onTap: () => pushTo(context, Routes.resetPassword),
-                          ),
-                          ProfileItem(title: 'FAQ', onTap: () {}),
-                          ProfileItem(title: 'Contact Us', onTap: () {}),
-                          ProfileItem(title: 'Privacy & Terms', onTap: () {}),
-                        ],
-                      );
-                    },
-                  ),
+            appBar: AppBar(
+              centerTitle: true,
+              automaticallyImplyLeading: false,
+              title: Text('profile'.tr(), style: TextStyles.title),
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    context.read<EditProfileCubit>().logout();
+                  },
+                  icon: CustomSvgPicture(path: AppImages.logoutSvg),
                 ),
               ],
             ),
-          ),
-        ),  // Scaffold
-        ),  // Builder
-      ),    // BlocListener
+            body: MyBodyView(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: CachedNetworkImage(
+                          imageUrl: profileData?.image ?? '',
+                          height: 100,
+                          width: 100,
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) =>
+                                  const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => const Icon(
+                            Icons.person,
+                            size: 100,
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                      ),
+                      Gap(20),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            profileData?.name ?? '',
+                            style: TextStyles.subtitle1,
+                          ),
+                          Text(
+                            profileData?.email ?? '',
+                            style: TextStyles.body.copyWith(
+                              color: AppColors.darkGreyColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 32),
+                  Expanded(
+                    child: Builder(
+                      builder: (context) {
+                        return ListView(
+                          children: [
+                            ProfileItem(
+                              title: 'my_orders'.tr(),
+                              onTap: () => pushTo(context, Routes.myOrders),
+                            ),
+                            ProfileItem(
+                              title: 'edit_profile'.tr(),
+                              onTap: () {
+                                pushTo(context, Routes.editProfile).then((
+                                  value,
+                                ) {
+                                  setState(() {});
+                                });
+                              },
+                            ),
+                            ProfileItem(
+                              title: 'reset_password'.tr(),
+                              onTap: () =>
+                                  pushTo(context, Routes.resetPassword),
+                            ),
+                            ProfileItem(
+                              title: 'faq'.tr(),
+                              onTap: () {
+                                pushTo(context, Routes.faq);
+                              },
+                            ),
+                            ProfileItem(
+                              title: 'contact_us'.tr(),
+                              onTap: () {
+                                pushTo(context, Routes.contactUs);
+                              },
+                            ),
+                            ProfileItem(
+                              title: 'privacy_terms'.tr(),
+                              onTap: () {},
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ), // Scaffold
+        ), // Builder
+      ), // BlocListener
     );
   }
 }

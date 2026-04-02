@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:bookia/core/styles/colors.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/features/orders/order_details/data/models/order_details_response/data.dart';
@@ -14,7 +15,7 @@ class DeliveryAddressWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("Delivery Address", style: TextStyles.body),
+        Text("delivery_address".tr(), style: TextStyles.body),
         const Gap(12),
         Text(order.name ?? "No Name", style: TextStyles.body),
         const Gap(4),

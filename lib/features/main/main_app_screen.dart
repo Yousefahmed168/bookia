@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/constants/app_images.dart';
@@ -57,7 +58,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
             path: AppImages.homeSvg,
             color: AppColors.primaryColor,
           ),
-          label: 'Home',
+          label: 'home'.tr(),
         ),
         BottomNavigationBarItem(
           icon: CustomSvgPicture(path: AppImages.bookmarkSvg),
@@ -65,7 +66,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
             path: AppImages.bookmarkSvg,
             color: AppColors.primaryColor,
           ),
-          label: 'WishList',
+          label: 'wishlist'.tr(),
         ),
         BottomNavigationBarItem(
           icon: CustomSvgPicture(path: AppImages.cartSvg),
@@ -73,7 +74,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
             path: AppImages.cartSvg,
             color: AppColors.primaryColor,
           ),
-          label: 'Cart',
+          label: 'cart'.tr(),
         ),
         BottomNavigationBarItem(
           icon: CustomSvgPicture(path: AppImages.profileSvg),
@@ -81,7 +82,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
             path: AppImages.profileSvg,
             color: AppColors.primaryColor,
           ),
-          label: 'Profile',
+          label: 'profile'.tr(),
         ),
       ],
     );

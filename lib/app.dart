@@ -1,6 +1,8 @@
+import 'dart:io';
+
+import 'package:easy_localization/easy_localization.dart';
 import 'core/routes/app_router.dart';
 import 'package:flutter/material.dart';
-
 import 'core/styles/themes.dart';
 
 class MainApp extends StatelessWidget {
@@ -10,7 +12,12 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: AppRouter.routes,
+      locale: context.locale,
+      supportedLocales: context.supportedLocales,
+      localizationsDelegates: context.localizationDelegates,
       debugShowCheckedModeBanner: false,
+      builder: (_, child) =>
+          SafeArea(top: false, bottom: Platform.isAndroid, child: child!),
       theme: AppThemes.lightTheme,
     );
   }

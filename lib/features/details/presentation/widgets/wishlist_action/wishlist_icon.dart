@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,7 +27,7 @@ class WishlistActionWidget extends StatelessWidget {
             showMyDialog(context, state.msg, type: DialogType.success);
           } else if (state is WishlistActionErrorState) {
             pop(context);
-            showMyDialog(context, 'Something went wrong');
+            showMyDialog(context, 'something_went_wrong'.tr());
           } else if (state is WishlistActionLoadingState) {
             showLoadingDialog(context);
           }

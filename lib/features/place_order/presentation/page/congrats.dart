@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/routes/navigations.dart';
 import '../../../../core/routes/routes.dart';
@@ -27,19 +28,19 @@ class _OrderScreenState extends State<OrderScreen> {
               SvgPicture.asset(AppImages.successSvg),
               const SizedBox(height: 20),
               Text(
-                "SUCCESS!",
+                "success".tr(),
                 style: TextStyles.title,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
               Text(
-                "Your order will be delivered soon. Thank you for choosing our app!",
+                "order_success_desc".tr(),
                 style: TextStyles.caption1,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
               MainButton(
-                text: "Back To Home",
+                text: "back_to_home".tr(),
                 onPressed: () {
                   pushTo(context, Routes.mainappscreen);
                 },

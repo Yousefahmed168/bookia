@@ -1,5 +1,7 @@
+import 'package:bookia/core/functions/extencion.dart';
 import 'package:bookia/features/home/presentation/cubit/home_state.dart';
 import 'package:bookia/features/search/presentation/pages/search_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -35,6 +37,13 @@ class HomeScreen extends StatelessWidget {
                     );
                   },
                   icon: CustomSvgPicture(path: AppImages.searchSvg),
+                ),
+                IconButton(
+                  onPressed: () {
+                    bool isArabic = context.isArabic;
+                    context.setLocale(Locale(isArabic ? 'en' : 'ar'));
+                  },
+                  icon: Icon(Icons.language),
                 ),
               ],
             ),

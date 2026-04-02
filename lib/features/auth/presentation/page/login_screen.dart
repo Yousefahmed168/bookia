@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -57,13 +58,13 @@ class LoginScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            'Welcome back! Glad to see you, Again!',
+                            'welcome_back'.tr(),
                             style: TextStyles.headline,
                           ),
                           Gap(32),
                           CustomTextFormField(
                             controller: cubit.emailController,
-                            hintText: 'Enter your email',
+                            hintText: 'email_hint'.tr(),
                             keyboardType: TextInputType.emailAddress,
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -77,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                           Gap(15),
                           PasswordTextFormField(
                             controller: cubit.passwordController,
-                            hintText: 'Enter your password',
+                            hintText: 'password_hint'.tr(),
                           ),
                           Gap(15),
                           Row(
@@ -88,7 +89,7 @@ class LoginScreen extends StatelessWidget {
                                   pushTo(context, Routes.forgetpassword);
                                 },
                                 child: Text(
-                                  'Forgot Password?',
+                                  'forgot_password'.tr(),
                                   style: TextStyles.caption1.copyWith(
                                     color: AppColors.darkGreyColor,
                                   ),
@@ -98,7 +99,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                           Gap(30),
                           MainButton(
-                            text: 'Login',
+                            text: 'login'.tr(),
                             onPressed: () {
                               if (cubit.formKey.currentState!.validate()) {
                                 cubit.login();
@@ -117,12 +118,12 @@ class LoginScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Don\'t have an account?', style: TextStyles.caption1),
+                      Text('no_account'.tr(), style: TextStyles.caption1),
                       Gap(5),
                       GestureDetector(
                         onTap: () {},
                         child: Text(
-                          'Register',
+                          'register_now'.tr(),
                           style: TextStyles.caption1.copyWith(
                             color: AppColors.primaryColor,
                           ),
