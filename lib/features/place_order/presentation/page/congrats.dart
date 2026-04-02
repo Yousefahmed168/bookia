@@ -42,7 +42,7 @@ class _OrderScreenState extends State<OrderScreen> {
               MainButton(
                 text: "back_to_home".tr(),
                 onPressed: () {
-                  pushTo(context, Routes.mainappscreen);
+                  pushToBase(context, Routes.mainappscreen);
                 },
               ),
             ],

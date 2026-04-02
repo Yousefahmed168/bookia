@@ -15,7 +15,7 @@ class ProfileRepo {
     try {
       var response = await DioProvider.post(
         endpoint: Apis.updateProfile,
-        data: params.toFormData(),
+        data: await params.toFormData(),
         headers: {
           'Content-Type': 'multipart/form-data',
           "authorization": "Bearer ${SharedPref.getToken()}",

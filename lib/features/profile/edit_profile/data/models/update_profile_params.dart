@@ -24,13 +24,13 @@ class UpdateProfileParams {
     'phone': phone,
   };
 
-  FormData toFormData() {
+  Future<FormData> toFormData() async {
     FormData formData = FormData.fromMap({
       if (name != null) 'name': name,
       'address': address,
       if (phone != null) 'phone': phone,
       if (image != null)
-        'image': MultipartFile.fromFile(
+        'image': await MultipartFile.fromFile(
           image!.path,
           filename: image!.path.split('/').last,
         ),
