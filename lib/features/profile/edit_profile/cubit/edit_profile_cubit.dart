@@ -1,10 +1,9 @@
-
 import 'dart:io';
 
-import 'package:bookia/core/services/local/shared_pref.dart';
-import 'package:bookia/features/profile/edit_profile/data/models/update_profile_params.dart';
-import 'package:bookia/features/profile/edit_profile/data/repo/profile_repo.dart';
-import 'package:bookia/features/profile/edit_profile/cubit/edit_profile_state.dart';
+import '../../../../core/services/local/shared_pref.dart';
+import '../data/models/update_profile_params.dart';
+import '../data/repo/profile_repo.dart';
+import 'edit_profile_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,27 +32,27 @@ class EditProfileCubit extends Cubit<EditProfileState> {
       address: addressController.text,
       image: image,
     );
-    var data = await ProfileRepo.editProfile(params);
+    var response = await ProfileRepo.editProfile(params);
 
-    if (data != null) {
-      emit(EditProfileSuccess());
-    } else {
-      emit(EditProfileError());
-    }
+    response.fold(
+      (l) => emit(EditProfileError(message: l.message)),
+      (r) => emit(EditProfileSuccess()),
+    );
   }
+
   Future<void> logout() async {
     emit(LogoutLoadingState());
-    var success = await ProfileRepo.logout();
+    var response = await ProfileRepo.logout();
 
     if (isClosed) return;
 
-    if (success) {
-      await SharedPref.removeData(SharedPref.kToken);
-      await SharedPref.removeData(SharedPref.kUser);
-      emit(LogoutSuccessState());
-    } else {
-      emit(LogoutErrorState());
-    }
+    response.fold(
+      (l) => emit(LogoutErrorState(message: l.message)),
+      (r) async {
+        await SharedPref.removeData(SharedPref.kToken);
+        await SharedPref.removeData(SharedPref.kUser);
+        emit(LogoutSuccessState());
+      },
+    );
   }
 }
-

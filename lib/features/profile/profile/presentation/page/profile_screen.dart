@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:bookia/core/constants/app_images.dart';
-import 'package:bookia/core/routes/navigations.dart';
-import 'package:bookia/core/services/local/shared_pref.dart';
-import 'package:bookia/core/widgets/custom_svg_picture.dart';
+import '../../../../../core/constants/app_images.dart';
+import '../../../../../core/routes/navigations.dart';
+import '../../../../../core/services/local/shared_pref.dart';
+import '../../../../../core/widgets/custom_svg_picture.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

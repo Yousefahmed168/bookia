@@ -12,15 +12,14 @@ class Routes {
   static String createnewpassword = '/createnewpassword';
   static String otpverfication = '/otpverfication';
   static String passwordchanged = '/passwordchanged';
-  static String forgetpassword = '/passwordchanged';
+  static String forgetpassword = '/forgetpassword';
   static String details = '/details';
   static String placeorder = '/placeorder';
   static String orderSuccess = '/order-success';
   static String editProfile = '/edit-profile';
-  static const String orderDetails = "/order-details";
-  static const String myOrders = "/my-orders";
-  static const String resetPassword = "/reset-password";
-  static const String faq = "/faq";
-  static const String contactUs = "/contact-us";
-
+  static String orderDetails = "/order-details";
+  static String myOrders = "/my-orders";
+  static String resetPassword = "/reset-password";
+  static String faq = "/faq";
+  static String contactUs = "/contact-us";
 }

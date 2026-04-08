@@ -1,4 +1,5 @@
-import 'dart:developer';
+import 'package:bookia/core/services/dio/failure.dart';
+import 'package:dartz/dartz.dart';
 
 import '../../../../core/services/dio/apis.dart';
 import '../../../../core/services/dio/dio_provider.dart';
@@ -6,97 +7,92 @@ import '../../../../core/services/local/shared_pref.dart';
 import '../models/cart_response/cart_response.dart';
 
 class CartRepo {
-  static Future<CartResponse?> getCart() async {
-    try {
-      var response = await DioProvider.get(
-        endpoint: Apis.cart,
-        headers: {"Authorization": "Bearer ${SharedPref.getToken()}"},
-      );
-      if (response.statusCode != null &&
-          response.statusCode! >= 200 &&
-          response.statusCode! < 300) {
-        return CartResponse.fromJson(response.data);
-      } else {
-        return null;
-      }
-    } catch (e) {
-      return null;
-    }
+  static Future<Either<Failure, CartResponse>> getCart() async {
+    var response = await DioProvider.getApi(
+      endpoint: Apis.cart,
+      headers: {"Authorization": "Bearer ${SharedPref.getToken()}"},
+    );
+
+    return response.fold(
+      (l) => Left(l),
+      (right) {
+        try {
+          return Right(CartResponse.fromJson(right));
+        } catch (e) {
+          return Left(ParseFailure(message: 'Error parsing cart data'));
+        }
+      },
+    );
   }
 
-  static Future<CartResponse?> addToCart(int productId) async {
-    try {
-      var response = await DioProvider.post(
-        endpoint: Apis.addToCart,
-        data: {"product_id": productId},
-        headers: {"Authorization": "Bearer ${SharedPref.getToken()}"},
-      );
-      if (response.statusCode != null &&
-          response.statusCode! >= 200 &&
-          response.statusCode! < 300) {
-        return CartResponse.fromJson(response.data);
-      } else {
-        return null;
-      }
-    } catch (e) {
-      return null;
-    }
+  static Future<Either<Failure, CartResponse>> addToCart(int productId) async {
+    var response = await DioProvider.postApi(
+      endpoint: Apis.addToCart,
+      data: {"product_id": productId},
+      headers: {"Authorization": "Bearer ${SharedPref.getToken()}"},
+    );
+
+    return response.fold(
+      (l) => Left(l),
+      (right) {
+        try {
+          return Right(CartResponse.fromJson(right));
+        } catch (e) {
+          return Left(ParseFailure(message: 'Error parsing cart data'));
+        }
+      },
+    );
   }
 
-  static Future<CartResponse?> removeFromCart(int cartItemId) async {
-    try {
-      var response = await DioProvider.post(
-        endpoint: Apis.removeFromCart,
-        data: {"cart_item_id": cartItemId},
-        headers: {"Authorization": "Bearer ${SharedPref.getToken()}"},
-      );
-      if (response.statusCode != null &&
-          response.statusCode! >= 200 &&
-          response.statusCode! < 300) {
-        return CartResponse.fromJson(response.data);
-      } else {
-        return null;
-      }
-    } catch (e) {
-      return null;
-    }
+  static Future<Either<Failure, CartResponse>> removeFromCart(
+      int cartItemId) async {
+    var response = await DioProvider.postApi(
+      endpoint: Apis.removeFromCart,
+      data: {"cart_item_id": cartItemId},
+      headers: {"Authorization": "Bearer ${SharedPref.getToken()}"},
+    );
+
+    return response.fold(
+      (l) => Left(l),
+      (right) {
+        try {
+          return Right(CartResponse.fromJson(right));
+        } catch (e) {
+          return Left(ParseFailure(message: 'Error parsing cart data'));
+        }
+      },
+    );
   }
 
-  static Future<CartResponse?> updateCart(int cartItemId, int quantity) async {
-    try {
-      var response = await DioProvider.post(
-        endpoint: Apis.updateCart,
-        data: {"cart_item_id": cartItemId, "quantity": quantity},
-        headers: {"Authorization": "Bearer ${SharedPref.getToken()}"},
-      );
-      if (response.statusCode != null &&
-          response.statusCode! >= 200 &&
-          response.statusCode! < 300) {
-        return CartResponse.fromJson(response.data);
-      } else {
-        return null;
-      }
-    } catch (e) {
-      return null;
-    }
+  static Future<Either<Failure, CartResponse>> updateCart(
+      int cartItemId, int quantity) async {
+    var response = await DioProvider.postApi(
+      endpoint: Apis.updateCart,
+      data: {"cart_item_id": cartItemId, "quantity": quantity},
+      headers: {"Authorization": "Bearer ${SharedPref.getToken()}"},
+    );
+
+    return response.fold(
+      (l) => Left(l),
+      (right) {
+        try {
+          return Right(CartResponse.fromJson(right));
+        } catch (e) {
+          return Left(ParseFailure(message: 'Error parsing cart data'));
+        }
+      },
+    );
   }
 
-  static Future<bool> checkout() async {
-    try {
-      var response = await DioProvider.get(
-        endpoint: Apis.checkout,
-        headers: {"Authorization": "Bearer ${SharedPref.getToken()}"},
-      );
-      if (response.statusCode != null &&
-          response.statusCode! >= 200 &&
-          response.statusCode! < 300) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      log(e.toString());
-      return false;
-    }
+  static Future<Either<Failure, bool>> checkout() async {
+    var response = await DioProvider.getApi(
+      endpoint: Apis.checkout,
+      headers: {"Authorization": "Bearer ${SharedPref.getToken()}"},
+    );
+
+    return response.fold(
+      (l) => Left(l),
+      (right) => const Right(true),
+    );
   }
 }

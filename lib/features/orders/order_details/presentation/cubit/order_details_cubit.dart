@@ -1,6 +1,7 @@
-import 'package:bookia/features/orders/order_details/data/models/order_details_response/order_details_response.dart';
-import 'package:bookia/features/orders/order_details/data/repo/order_details_repo.dart';
-import 'package:bookia/features/orders/order_details/presentation/cubit/order_details_state.dart';
+
+import '../../data/models/order_details_response/order_details_response.dart';
+import '../../data/repo/order_details_repo.dart';
+import 'order_details_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderDetailsCubit extends Cubit<OrderDetailsState> {
@@ -10,22 +11,14 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
 
   Future<void> getOrderDetails(int orderId) async {
     emit(OrderDetailsLoading());
+    var response = await OrderDetailsRepo.getOrderDetails(orderId);
 
-    try {
-      final response = await OrderDetailsRepo.getOrderDetails(orderId);
-
-      if (response != null && response.data != null) {
-        orderDetailsResponse = response;
+    response.fold(
+      (l) => emit(OrderDetailsError(message: l.message)),
+      (r) {
+        orderDetailsResponse = r;
         emit(OrderDetailsLoaded());
-      } else {
-        emit(
-          OrderDetailsError(
-            message: response?.message ?? "Failed to fetch order details.",
-          ),
-        );
-      }
-    } catch (e) {
-      emit(OrderDetailsError(message: "An error occurred"));
-    }
+      },
+    );
   }
 }

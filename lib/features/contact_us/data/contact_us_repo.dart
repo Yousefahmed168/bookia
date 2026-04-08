@@ -1,16 +1,19 @@
-import 'package:bookia/core/services/dio/apis.dart';
-import 'package:bookia/core/services/dio/dio_provider.dart';
-import 'package:bookia/core/services/local/shared_pref.dart';
+import 'package:bookia/core/services/dio/failure.dart';
+import 'package:dartz/dartz.dart';
+
+import '../../../core/services/dio/apis.dart';
+import '../../../core/services/dio/dio_provider.dart';
+import '../../../core/services/local/shared_pref.dart';
 
 class ContactUsRepo {
-  static Future<void> sendMessage({
+  static Future<Either<Failure, bool>> sendMessage({
     required String name,
     required String email,
     required String subject,
     required String message,
   }) async {
     final token = SharedPref.getToken();
-    await DioProvider.post(
+    var response = await DioProvider.postApi(
       endpoint: Apis.contactUs,
       headers: {'Authorization': 'Bearer $token'},
       data: {
@@ -19,6 +22,11 @@ class ContactUsRepo {
         'subject': subject,
         'message': message,
       },
+    );
+
+    return response.fold(
+      (l) => Left(l),
+      (r) => const Right(true),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:bookia/core/styles/colors.dart';
-import 'package:bookia/core/styles/text_styles.dart';
+import '../../../../../core/styles/colors.dart';
+import '../../../../../core/styles/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class OrderItem extends StatelessWidget {

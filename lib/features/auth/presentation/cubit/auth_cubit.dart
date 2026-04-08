@@ -1,9 +1,8 @@
+import 'package:bookia/features/auth/data/models/register_params.dart';
+import 'package:bookia/features/auth/data/repo/auth_repo.dart';
+import 'package:bookia/features/auth/presentation/cubit/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../data/models/register_params.dart';
-import '../../data/repo/auth_repo.dart';
-import 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitialState());
@@ -23,13 +22,16 @@ class AuthCubit extends Cubit<AuthState> {
         password: passwordController.text,
       ),
     );
-    if (response != null) {
-      emit(AuthSuccessState(message: "Success to Login"));
-    } else {
-      emit(AuthErrorState(message: "Faild to Login"));
-    }
-  }
 
+    response.fold(
+      (l) {
+        emit(AuthErrorState(message: l.message));
+      },
+      (r) {
+        emit(AuthSuccessState());
+      },
+    );
+  }
   Future<void> register() async {
     emit(AuthLoadingState());
     var response = await AuthRepo.register(
@@ -40,11 +42,10 @@ class AuthCubit extends Cubit<AuthState> {
         passwordConfirmation: passwordConfirmationController.text,
       ),
     );
-    if (response != null) {
-      emit(AuthSuccessState(message: "Success to Register"));
-    } else {
-      emit(AuthErrorState(message: "Faild to Register"));
-    }
+    response.fold(
+      (l) => emit(AuthErrorState(message: l.message)),
+      (r) => emit(AuthSuccessState()),
+    );
   }
 
   Future<void> forgetpassword() async {
@@ -52,21 +53,19 @@ class AuthCubit extends Cubit<AuthState> {
     var response = await AuthRepo.forgetpassword(
       RegisterParams(email: emailController.text),
     );
-    if (response != null) {
-      emit(AuthSuccessState(message: 'Password is Right'));
-    } else {
-      emit(AuthErrorState(message: 'Wrong Password'));
-    }
+    response.fold(
+      (l) => emit(AuthErrorState(message: l.message)),
+      (r) => emit(AuthSuccessState()),
+    );
   }
 
   Future<void> otpcode() async {
     emit(AuthLoadingState());
     var response = await AuthRepo.otpcode(RegisterParams());
-    if (response != null) {
-      emit(AuthSuccessState(message: 'Code is Right'));
-    } else {
-      emit(AuthErrorState(message: 'Wrong Code'));
-    }
+    response.fold(
+      (l) => emit(AuthErrorState(message: l.message)),
+      (r) => emit(AuthSuccessState()),
+    );
   }
 
   Future<void> resetpassword() async {
@@ -77,10 +76,9 @@ class AuthCubit extends Cubit<AuthState> {
         passwordConfirmation: passwordConfirmationController.text,
       ),
     );
-    if (response != null) {
-      emit(AuthSuccessState(message: 'Password Changed'));
-    } else {
-      emit(AuthErrorState(message: 'Cant Change Password'));
-    }
+    response.fold(
+      (l) => emit(AuthErrorState(message: l.message)),
+      (r) => emit(AuthSuccessState()),
+    );
   }
 }

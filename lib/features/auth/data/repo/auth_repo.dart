@@ -1,123 +1,94 @@
-import 'dart:developer';
+
+import 'package:bookia/core/services/dio/failure.dart';
+import 'package:dartz/dartz.dart';
 
 import '../../../../core/services/dio/apis.dart';
 import '../../../../core/services/dio/dio_provider.dart';
 import '../../../../core/services/local/shared_pref.dart';
-import '../models/auth_response/register_response.dart';
+import '../models/auth_response/auth_resopnse.dart';
 import '../models/otpcode_respose.dart';
 import '../models/register_params.dart';
 
 class AuthRepo {
-  static Future<AuthResponse?> register(RegisterParams params) async {
-    try {
-      log(params.toJson().toString());
-      var response = await DioProvider.post(
-        endpoint: Apis.register,
-        data: params.toJson(),
-      );
-      if (response.statusCode != null &&
-          response.statusCode! >= 200 &&
-          response.statusCode! < 300) {
-        var data = AuthResponse.fromJson(response.data);
-        await SharedPref.setToken(data.data?.token ?? '');
-        await SharedPref.setUserInfo(data.data?.user);
-        return data;
-      } else {
-        return null;
-      }
-    } on Exception catch (e) {
-      log(e.toString());
-      return null;
-    }
+  static Future<Either<Failure, AuthResponse>> register(
+    RegisterParams params,
+  ) async {
+    var response = await DioProvider.postApi(
+      endpoint: Apis.register,
+      data: params.toJson(),
+    );
+
+    return response.fold(
+      (l) => Left(l),
+      (right) {
+        var data = AuthResponse.fromJson(right);
+        SharedPref.setToken(data.token ?? '');
+        SharedPref.setUserInfo(data.user);
+        return Right(data);
+      },
+    );
   }
 
-  static Future<AuthResponse?> login(RegisterParams params) async {
-    try {
-      var response = await DioProvider.post(
-        endpoint: Apis.login,
-        data: params.toJson(),
-      );
-      if (response.statusCode != null &&
-          response.statusCode! >= 200 &&
-          response.statusCode! < 300) {
-        var data = AuthResponse.fromJson(response.data);
-        await SharedPref.setToken(data.data?.token ?? '');
-        await SharedPref.setUserInfo(data.data?.user);
-        return data;
-      } else {
-        return null;
-      }
-    } on Exception catch (e) {
-      log(e.toString());
-      return null;
-    }
+  static Future<Either<Failure, AuthResponse>> login(
+    RegisterParams params,
+  ) async {
+    var response = await DioProvider.postApi(
+      endpoint: Apis.login,
+      data: params.toJson(),
+    );
+
+    return response.fold(
+      (l) {
+        return Left(l);
+      },
+      (right) {
+        var data = AuthResponse.fromJson(right);
+        SharedPref.setToken(data.token ?? '');
+        SharedPref.setUserInfo(data.user);
+        return Right(data);
+      },
+    );
   }
 
-  static Future<AuthResponse?> forgetpassword(RegisterParams params) async {
-    try {
-      var response = await DioProvider.post(
-        endpoint: Apis.forgetpassword,
-        data: params.toJson(),
-      );
-      if (response.statusCode != null &&
-          response.statusCode! >= 200 &&
-          response.statusCode! < 300) {
-        return AuthResponse.fromJson(response.data);
-      } else if (response.statusCode == 500) {
-        return null;
-      }
-      return null;
-    } on Exception catch (e) {
-      log(e.toString());
-      return null;
-    }
+  static Future<Either<Failure, AuthResponse>> forgetpassword(
+    RegisterParams params,
+  ) async {
+    var response = await DioProvider.postApi(
+      endpoint: Apis.forgetpassword,
+      data: params.toJson(),
+    );
+
+    return response.fold(
+      (l) => Left(l),
+      (right) => Right(AuthResponse.fromJson(right)),
+    );
   }
 
-  static Future<Otpcode?> otpcode(RegisterParams params) async {
-    try {
-      var response = await DioProvider.post(
-        endpoint: Apis.otpcode,
-        data: params.toJson(),
-      );
+  static Future<Either<Failure, Otpcode>> otpcode(
+    RegisterParams params,
+  ) async {
+    var response = await DioProvider.postApi(
+      endpoint: Apis.otpcode,
+      data: params.toJson(),
+    );
 
-      if (response.statusCode != null &&
-          response.statusCode! >= 200 &&
-          response.statusCode! < 300) {
-        return Otpcode.fromJson(response.data);
-      }
-
-      if (response.statusCode == 500) {
-        return null;
-      }
-
-      return null;
-    } catch (e) {
-      log(e.toString());
-      return null;
-    }
+    return response.fold(
+      (l) => Left(l),
+      (right) => Right(Otpcode.fromJson(right)),
+    );
   }
 
-  static Future<Otpcode?> resetpassword(RegisterParams params) async {
-    try {
-      var response = await DioProvider.post(
-        endpoint: Apis.otpcode,
-        data: params.toJson(),
-      );
+  static Future<Either<Failure, Otpcode>> resetpassword(
+    RegisterParams params,
+  ) async {
+    var response = await DioProvider.postApi(
+      endpoint: Apis.otpcode,
+      data: params.toJson(),
+    );
 
-      if (response.statusCode != null &&
-          response.statusCode! >= 200 &&
-          response.statusCode! < 300) {
-        return Otpcode.fromJson(response.data);
-      }
-
-      if (response.statusCode == 500) {
-        return null;
-      }
-
-      return null;
-    } catch (e) {
-      log(e.toString());
-      return null;
-    }
+    return response.fold(
+      (l) => Left(l),
+      (right) => Right(Otpcode.fromJson(right)),
+    );
   }
 }

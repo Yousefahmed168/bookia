@@ -1,16 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:bookia/core/styles/colors.dart';
-import 'package:bookia/core/styles/text_styles.dart';
-import 'package:bookia/core/widgets/custom_back_button.dart';
-import 'package:bookia/core/widgets/custom_text_form_field.dart';
-import 'package:bookia/features/home/data/models/best_seller_books_response/product.dart';
-import 'package:bookia/features/home/presentation/widgets/book_card.dart';
-import 'package:bookia/features/search/presentation/cubit/search_cubit.dart';
-import 'package:bookia/features/search/presentation/cubit/search_state.dart';
+import '../../../../core/styles/colors.dart';
+import '../../../../core/styles/text_styles.dart';
+import '../../../../core/widgets/custom_back_button.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
+import '../../../home/data/models/best_seller_books_response/product.dart';
+import '../../../home/presentation/widgets/book_card.dart';
+import '../cubit/search_cubit.dart';
+import '../cubit/search_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:bookia/core/utils/debouncer.dart';
+import '../../../../core/utils/debouncer.dart';
 
 class SearchScreen extends StatelessWidget {
   final List<Product> products;

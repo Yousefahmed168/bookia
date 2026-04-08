@@ -1,5 +1,5 @@
-import 'package:bookia/features/home/data/models/best_seller_books_response/product.dart';
-import 'package:bookia/features/search/presentation/cubit/search_state.dart';
+import '../../../home/data/models/best_seller_books_response/product.dart';
+import 'search_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 

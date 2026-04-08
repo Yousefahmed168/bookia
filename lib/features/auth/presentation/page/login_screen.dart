@@ -121,7 +121,9 @@ class LoginScreen extends StatelessWidget {
                       Text('no_account'.tr(), style: TextStyles.caption1),
                       Gap(5),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          pushTo(context, Routes.registerscreen);
+                        },
                         child: Text(
                           'register_now'.tr(),
                           style: TextStyles.caption1.copyWith(

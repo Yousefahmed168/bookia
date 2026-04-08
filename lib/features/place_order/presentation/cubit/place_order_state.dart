@@ -6,7 +6,10 @@ class GovernoratesLoadingState extends PlaceOrderState {}
 
 class GovernoratesSuccessState extends PlaceOrderState {}
 
-class GovernoratesErrorState extends PlaceOrderState {}
+class GovernoratesErrorState extends PlaceOrderState {
+  final String message;
+  GovernoratesErrorState({required this.message});
+}
 
 class PlaceOrderLoading extends PlaceOrderState {}
 

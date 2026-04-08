@@ -10,11 +10,14 @@ class FaqCubit extends Cubit<FaqState> {
 
   Future<void> getFaqs() async {
     emit(FaqLoadingState());
-    try {
-      faqs = await FaqRepo.getFaqs();
-      emit(FaqSuccessState());
-    } catch (e) {
-      emit(FaqErrorState(e.toString()));
-    }
+    var response = await FaqRepo.getFaqs();
+
+    response.fold(
+      (l) => emit(FaqErrorState(l.message)),
+      (r) {
+        faqs = r;
+        emit(FaqSuccessState());
+      },
+    );
   }
 }

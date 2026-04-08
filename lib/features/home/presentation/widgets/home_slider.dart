@@ -24,6 +24,9 @@ class _HomeSliderState extends State<HomeSlider> {
       builder: (context, state) {
         if (state is HomeSuccessState) {
           var sliders = context.read<HomeCubit>().sliders;
+          if (sliders.isEmpty) {
+            return const SizedBox();
+          }
           return Column(
             children: [
               CarouselSlider.builder(
@@ -67,6 +70,8 @@ class _HomeSliderState extends State<HomeSlider> {
               ),
             ],
           );
+        } else if (state is HomeErrorState) {
+          return const SizedBox(); // On error, just hide the slider
         } else {
           return Shimmer.fromColors(
             baseColor: Colors.grey[300]!,

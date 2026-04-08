@@ -27,6 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     log(token.toString());
 
     Future.delayed(const Duration(seconds: 3), () {
+      if (!mounted) return;
       if (token != null && token.isNotEmpty) {
         pushReplacement(context, Routes.mainappscreen);
       } else {

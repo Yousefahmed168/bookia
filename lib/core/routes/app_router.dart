@@ -1,13 +1,13 @@
-import 'package:bookia/features/contact_us/presentation/cubit/contact_us_cubit.dart';
-import 'package:bookia/features/contact_us/presentation/page/contact_us_screen.dart';
-import 'package:bookia/features/faq/presentation/cubit/faq_cubit.dart';
-import 'package:bookia/features/faq/presentation/page/faq_screen.dart';
-import 'package:bookia/features/orders/my_orders/presentation/cubit/my_order_cubit.dart';
-import 'package:bookia/features/orders/my_orders/presentation/screens/my_orders_screen.dart';
-import 'package:bookia/features/orders/order_details/presentation/cubit/order_details_cubit.dart';
-import 'package:bookia/features/orders/order_details/presentation/screens/order_details_screen.dart';
-import 'package:bookia/features/profile/reset_password/presentation/cubit/reset_password_cubit.dart';
-import 'package:bookia/features/profile/reset_password/presentation/screens/reset_password_screen.dart';
+import '../../features/contact_us/presentation/cubit/contact_us_cubit.dart';
+import '../../features/contact_us/presentation/page/contact_us_screen.dart';
+import '../../features/faq/presentation/cubit/faq_cubit.dart';
+import '../../features/faq/presentation/page/faq_screen.dart';
+import '../../features/orders/my_orders/presentation/cubit/my_order_cubit.dart';
+import '../../features/orders/my_orders/presentation/screens/my_orders_screen.dart';
+import '../../features/orders/order_details/presentation/cubit/order_details_cubit.dart';
+import '../../features/orders/order_details/presentation/screens/order_details_screen.dart';
+import '../../features/profile/reset_password/presentation/cubit/reset_password_cubit.dart';
+import '../../features/profile/reset_password/presentation/screens/reset_password_screen.dart';
 
 import 'routes.dart';
 import '../../features/auth/presentation/page/forgot_password.dart';

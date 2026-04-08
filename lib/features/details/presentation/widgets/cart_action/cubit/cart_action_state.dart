@@ -10,4 +10,7 @@ class CartActionSuccessState extends CartActionState {
   CartActionSuccessState({required this.msg});
 }
 
-class CartActionErrorState extends CartActionState {}
+class CartActionErrorState extends CartActionState {
+  final String message;
+  CartActionErrorState({required this.message});
+}

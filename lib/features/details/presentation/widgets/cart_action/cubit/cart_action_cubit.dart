@@ -8,26 +8,22 @@ class CartActionCubit extends Cubit<CartActionState> {
 
   Future<void> addToCart(int productId) async {
     emit(CartActionLoadingState());
-    var data = await CartRepo.addToCart(productId);
-    if (data != null) {
-      var products = data.data?.cartItems ?? [];
+    var response = await CartRepo.addToCart(productId);
+    response.fold((l) => emit(CartActionErrorState(message: l.message)), (r) {
+      var products = r.data?.cartItems ?? [];
       SharedPref.cacheCartIds(products);
       emit(CartActionSuccessState(msg: 'Added To Cart'));
-    } else {
-      emit(CartActionErrorState());
-    }
+    });
   }
 
   Future<void> removeFromCart(int productId) async {
     emit(CartActionLoadingState());
-    var data = await CartRepo.removeFromCart(productId);
-    if (data != null) {
-      var products = data.data?.cartItems ?? [];
+    var response = await CartRepo.removeFromCart(productId);
+    response.fold((l) => emit(CartActionErrorState(message: l.message)), (r) {
+      var products = r.data?.cartItems ?? [];
       SharedPref.cacheCartIds(products);
       emit(CartActionSuccessState(msg: 'Removed From Cart'));
-    } else {
-      emit(CartActionErrorState());
-    }
+    });
   }
 
   bool isProductInCart(int productId) {

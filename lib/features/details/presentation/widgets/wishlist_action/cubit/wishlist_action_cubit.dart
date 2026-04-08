@@ -1,3 +1,4 @@
+
 import '../../../../../../core/services/local/shared_pref.dart';
 import 'wishlist_icon_state.dart';
 import '../../../../../wishlist/data/repo/wishlist_repo.dart';
@@ -8,26 +9,30 @@ class WishlistActionCubit extends Cubit<WishlistActionState> {
 
   Future<void> addToWishlist(int productId) async {
     emit(WishlistActionLoadingState());
-    var data = await WishlistRepo.addToWishlist(productId);
-    if (data != null) {
-      var products = data.data?.products ?? [];
-      SharedPref.cacheWishlistIds(products);
-      emit(WishlistActionSuccessState(msg: 'Added To Wishlist'));
-    } else {
-      emit(WishlistActionErrorState());
-    }
+    var response = await WishlistRepo.addToWishlist(productId);
+
+    response.fold(
+      (l) => emit(WishlistActionErrorState(message: l.message)),
+      (r) {
+        var products = r.data?.products ?? [];
+        SharedPref.cacheWishlistIds(products);
+        emit(WishlistActionSuccessState(msg: 'Added To Wishlist'));
+      },
+    );
   }
 
   Future<void> removeFromWishlist(int productId) async {
     emit(WishlistActionLoadingState());
-    var data = await WishlistRepo.removeFromWishlist(productId);
-    if (data != null) {
-      var products = data.data?.products ?? [];
-      SharedPref.cacheWishlistIds(products);
-      emit(WishlistActionSuccessState(msg: 'Removed From Wishlist'));
-    } else {
-      emit(WishlistActionErrorState());
-    }
+    var response = await WishlistRepo.removeFromWishlist(productId);
+
+    response.fold(
+      (l) => emit(WishlistActionErrorState(message: l.message)),
+      (r) {
+        var products = r.data?.products ?? [];
+        SharedPref.cacheWishlistIds(products);
+        emit(WishlistActionSuccessState(msg: 'Removed From Wishlist'));
+      },
+    );
   }
 
   bool isProductInWishlist(int productId) {

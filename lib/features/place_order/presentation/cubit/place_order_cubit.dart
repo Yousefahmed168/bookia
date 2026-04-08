@@ -1,3 +1,4 @@
+
 import '../../data/models/governorate.dart';
 import '../../data/repo/place_order_repo.dart';
 import 'place_order_state.dart';
@@ -10,13 +11,15 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
 
   Future<void> getGovernorates() async {
     emit(GovernoratesLoadingState());
-    var data = await PlaceOrderRepo.getGovernorates();
-    if (data != null && data.data != null) {
-      governorates = data.data ?? [];
-      emit(GovernoratesSuccessState());
-    } else {
-      emit(GovernoratesErrorState());
-    }
+    var response = await PlaceOrderRepo.getGovernorates();
+
+    response.fold(
+      (l) => emit(GovernoratesErrorState(message: l.message)),
+      (r) {
+        governorates = r.data ?? [];
+        emit(GovernoratesSuccessState());
+      },
+    );
   }
 
   Future<void> placeOrder({
@@ -27,17 +30,17 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
     required int governorateId,
   }) async {
     emit(PlaceOrderLoading());
-    var success = await PlaceOrderRepo.placeOrder(
+    var response = await PlaceOrderRepo.placeOrder(
       name: name,
       email: email,
       phone: phone,
       address: address,
       governorateId: governorateId,
     );
-    if (success) {
-      emit(PlaceOrderSuccess());
-    } else {
-      emit(PlaceOrderError('Failed to place order. Please try again.'));
-    }
+
+    response.fold(
+      (l) => emit(PlaceOrderError(l.message)),
+      (r) => emit(PlaceOrderSuccess()),
+    );
   }
 }

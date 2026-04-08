@@ -1,5 +1,6 @@
-import 'package:bookia/features/contact_us/data/contact_us_repo.dart';
-import 'package:bookia/features/contact_us/presentation/cubit/contact_us_state.dart';
+
+import '../../data/contact_us_repo.dart';
+import 'contact_us_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ContactUsCubit extends Cubit<ContactUsState> {
@@ -12,16 +13,16 @@ class ContactUsCubit extends Cubit<ContactUsState> {
     required String message,
   }) async {
     emit(ContactUsLoadingState());
-    try {
-      await ContactUsRepo.sendMessage(
-        name: name,
-        email: email,
-        subject: subject,
-        message: message,
-      );
-      emit(ContactUsSuccessState());
-    } catch (e) {
-      emit(ContactUsErrorState(e.toString()));
-    }
+    var response = await ContactUsRepo.sendMessage(
+      name: name,
+      email: email,
+      subject: subject,
+      message: message,
+    );
+
+    response.fold(
+      (l) => emit(ContactUsErrorState(l.message)),
+      (r) => emit(ContactUsSuccessState()),
+    );
   }
 }

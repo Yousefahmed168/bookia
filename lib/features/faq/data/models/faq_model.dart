@@ -11,9 +11,9 @@ class FaqModel {
 
   factory FaqModel.fromJson(Map<String, dynamic> json) {
     return FaqModel(
-      id: json['id'],
-      question: json['question'],
-      answer: json['answer'],
+      id: int.tryParse(json['id'].toString()) ?? 0,
+      question: json['question']?.toString() ?? '',
+      answer: json['answer']?.toString() ?? '',
     );
   }
 }

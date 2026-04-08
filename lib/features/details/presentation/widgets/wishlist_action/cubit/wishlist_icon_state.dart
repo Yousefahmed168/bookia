@@ -10,4 +10,7 @@ class WishlistActionSuccessState extends WishlistActionState {
   WishlistActionSuccessState({required this.msg});
 }
 
-class WishlistActionErrorState extends WishlistActionState {}
+class WishlistActionErrorState extends WishlistActionState {
+  final String message;
+  WishlistActionErrorState({required this.message});
+}
