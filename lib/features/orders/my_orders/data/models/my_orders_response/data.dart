@@ -10,7 +10,7 @@ class Data {
   Data({this.orders, this.meta, this.links});
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    orders: (json['orders'] as List<dynamic>?)
+    orders: (json['data'] as List<dynamic>?)
         ?.map((e) => Order.fromJson(e as Map<String, dynamic>))
         .toList(),
     meta: json['meta'] == null

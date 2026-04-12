@@ -17,8 +17,8 @@ class CartCubit extends Cubit<CartState> {
     response.fold(
       (l) => emit(CartErrorState(message: l.message)),
       (r) {
-        products = r.data?.cartItems ?? [];
-        total = r.data?.total ?? '';
+        products = r.cartItems ?? [];
+        total = r.total.toString();
         SharedPref.cacheCartIds(products);
         emit(CartSuccessState());
       },

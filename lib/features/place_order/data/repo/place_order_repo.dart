@@ -4,17 +4,21 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/services/dio/apis.dart';
 import '../../../../core/services/dio/dio_provider.dart';
 import '../../../../core/services/local/shared_pref.dart';
-import '../models/governorates_response.dart';
+import '../models/governorate.dart';
 
 class PlaceOrderRepo {
-  static Future<Either<Failure, GovernoratesResponse>> getGovernorates() async {
+  static Future<Either<Failure, List<Governorate>>> getGovernorates() async {
     var response = await DioProvider.getApi(endpoint: Apis.governorates);
 
     return response.fold(
       (l) => Left(l),
       (right) {
         try {
-          return Right(GovernoratesResponse.fromJson(right));
+          var list = right as List<dynamic>;
+          var governoratesList = list
+              .map((e) => Governorate.fromJson(e as Map<String, dynamic>))
+              .toList();
+          return Right(governoratesList);
         } catch (e) {
           return Left(ParseFailure(message: 'Error parsing governorates data'));
         }

@@ -14,5 +14,7 @@ void pushToBase(BuildContext context, String route, {Object? extra}) {
 }
 
 void pop(BuildContext context) {
-  context.pop();
+  if (context.canPop()) {
+    context.pop();
+  }
 }

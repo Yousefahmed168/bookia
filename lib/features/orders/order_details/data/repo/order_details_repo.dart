@@ -4,10 +4,10 @@ import 'package:dartz/dartz.dart';
 import '../../../../../core/services/dio/apis.dart';
 import '../../../../../core/services/dio/dio_provider.dart';
 import '../../../../../core/services/local/shared_pref.dart';
-import '../models/order_details_response/order_details_response.dart';
+import '../models/order_details_response/data.dart';
 
 class OrderDetailsRepo {
-  static Future<Either<Failure, OrderDetailsResponse>> getOrderDetails(
+  static Future<Either<Failure, Data>> getOrderDetails(
     int orderId,
   ) async {
     final token = SharedPref.getToken();
@@ -21,7 +21,7 @@ class OrderDetailsRepo {
       (l) => Left(l),
       (right) {
         try {
-          return Right(OrderDetailsResponse.fromJson(right));
+          return Right(Data.fromJson(right as Map<String, dynamic>));
         } catch (e) {
           return Left(ParseFailure(message: 'Error parsing order details'));
         }

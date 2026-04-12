@@ -14,7 +14,7 @@ class WishlistActionCubit extends Cubit<WishlistActionState> {
     response.fold(
       (l) => emit(WishlistActionErrorState(message: l.message)),
       (r) {
-        var products = r.data?.products ?? [];
+        var products = r.products ?? [];
         SharedPref.cacheWishlistIds(products);
         emit(WishlistActionSuccessState(msg: 'Added To Wishlist'));
       },
@@ -28,7 +28,7 @@ class WishlistActionCubit extends Cubit<WishlistActionState> {
     response.fold(
       (l) => emit(WishlistActionErrorState(message: l.message)),
       (r) {
-        var products = r.data?.products ?? [];
+        var products = r.products ?? [];
         SharedPref.cacheWishlistIds(products);
         emit(WishlistActionSuccessState(msg: 'Removed From Wishlist'));
       },

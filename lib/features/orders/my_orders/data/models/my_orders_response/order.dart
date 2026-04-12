@@ -9,10 +9,10 @@ class Order {
 
   factory Order.fromJson(Map<String, dynamic> json) => Order(
     id: json['id'] as int?,
-    orderCode: json['order_code'] as String?,
-    orderDate: json['order_date'] as String?,
-    status: json['status'] as String?,
-    total: json['total'] as String?,
+    orderCode: json['order_code']?.toString(),
+    orderDate: json['order_date']?.toString(),
+    status: json['status']?.toString(),
+    total: json['total']?.toString(),
   );
 
   Map<String, dynamic> toJson() => {

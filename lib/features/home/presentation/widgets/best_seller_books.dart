@@ -32,11 +32,11 @@ class BestSellerBooks extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 11,
-                        crossAxisSpacing: 11,
-                        childAspectRatio: .6,
-                      ),
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 11,
+                            crossAxisSpacing: 11,
+                            childAspectRatio: .6,
+                          ),
                       itemBuilder: (context, index) {
                         return BookCard(product: books[index]);
                       },

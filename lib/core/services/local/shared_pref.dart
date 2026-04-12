@@ -1,10 +1,9 @@
 import 'dart:convert';
 
-import '../../../features/cart/data/models/cart_response/cart_item.dart';
-import '../../../features/home/data/models/best_seller_books_response/product.dart';
+import 'package:bookia/features/auth/data/models/auth_response/user.dart';
+import 'package:bookia/features/cart/data/models/cart_response/cart_item.dart';
+import 'package:bookia/features/home/data/models/best_seller_books_response/product.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../features/auth/data/models/auth_response/user.dart';
 
 abstract class SharedPref {
   static late SharedPreferences pref;
@@ -46,36 +45,10 @@ abstract class SharedPref {
     return jsonToObject;
   }
 
-  static Future<void> cacheData(String key, dynamic value) async {
-    if (value is String) {
-      await pref.setString(key, value);
-    } else if (value is int) {
-      await pref.setInt(key, value);
-    } else if (value is bool) {
-      await pref.setBool(key, value);
-    } else if (value is double) {
-      await pref.setDouble(key, value);
-    } else if (value is List<String>) {
-      await pref.setStringList(key, value);
-    }
-  }
-
-  static Object getData(String key) {
-    return pref.get(key) ?? '';
-  }
-
-  static Future<void> removeData(String key) async {
-    await pref.remove(key);
-  }
-
-  static Future<void> clear() async {
-    await pref.clear();
-  }
-
   // --- wishlist
   static void cacheWishlistIds(List<Product> items) {
     var ids = items.map((item) => item.id.toString()).toList();
-
+    
     // cache list of ids
     cacheData(kWishlist, ids);
   }
@@ -104,4 +77,32 @@ abstract class SharedPref {
       return [];
     }
   }
+
+  static Future<void> cacheData(String key, dynamic value) async {
+    if (value is String) {
+      await pref.setString(key, value);
+    } else if (value is int) {
+      await pref.setInt(key, value);
+    } else if (value is bool) {
+      await pref.setBool(key, value);
+    } else if (value is double) {
+      await pref.setDouble(key, value);
+    } else if (value is List<String>) {
+      await pref.setStringList(key, value);
+    }
+  }
+
+  static Object getData(String key) {
+    return pref.get(key) ?? '';
+  }
+
+  static Future<void> removeData(String key) async {
+    await pref.remove(key);
+  }
+
+  static Future<void> clear() async {
+    await pref.clear();
+  }
 }
+
+

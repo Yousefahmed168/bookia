@@ -35,14 +35,15 @@ class ProfileRepo {
   }
 
   static Future<Either<Failure, bool>> logout() async {
-    var response = await DioProvider.postApi(
-      endpoint: Apis.logout,
-      headers: {"Authorization": "Bearer ${SharedPref.getToken()}"},
-    );
-
-    return response.fold(
-      (l) => Left(l),
-      (right) => const Right(true),
-    );
+    try {
+      await DioProvider.post(
+        endpoint: Apis.logout,
+        headers: {"Authorization": "Bearer ${SharedPref.getToken()}"},
+      );
+    } catch (e) {
+      // Ignore API errors on logout (like expired tokens or 401s),
+      // we still want the user to log out locally.
+    }
+    return const Right(true);
   }
 }

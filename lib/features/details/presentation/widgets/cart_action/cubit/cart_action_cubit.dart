@@ -10,7 +10,7 @@ class CartActionCubit extends Cubit<CartActionState> {
     emit(CartActionLoadingState());
     var response = await CartRepo.addToCart(productId);
     response.fold((l) => emit(CartActionErrorState(message: l.message)), (r) {
-      var products = r.data?.cartItems ?? [];
+      var products = r.cartItems ?? [];
       SharedPref.cacheCartIds(products);
       emit(CartActionSuccessState(msg: 'Added To Cart'));
     });
@@ -20,7 +20,7 @@ class CartActionCubit extends Cubit<CartActionState> {
     emit(CartActionLoadingState());
     var response = await CartRepo.removeFromCart(productId);
     response.fold((l) => emit(CartActionErrorState(message: l.message)), (r) {
-      var products = r.data?.cartItems ?? [];
+      var products = r.cartItems ?? [];
       SharedPref.cacheCartIds(products);
       emit(CartActionSuccessState(msg: 'Removed From Cart'));
     });

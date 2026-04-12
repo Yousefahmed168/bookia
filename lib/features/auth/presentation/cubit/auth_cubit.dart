@@ -32,6 +32,7 @@ class AuthCubit extends Cubit<AuthState> {
       },
     );
   }
+
   Future<void> register() async {
     emit(AuthLoadingState());
     var response = await AuthRepo.register(
@@ -43,8 +44,12 @@ class AuthCubit extends Cubit<AuthState> {
       ),
     );
     response.fold(
-      (l) => emit(AuthErrorState(message: l.message)),
-      (r) => emit(AuthSuccessState()),
+      (l) {
+        emit(AuthErrorState(message: l.message));
+      },
+      (r) {
+        emit(AuthSuccessState());
+      },
     );
   }
 

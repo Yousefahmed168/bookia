@@ -16,7 +16,7 @@ class WishlistCubit extends Cubit<WishlistState> {
     response.fold(
       (l) => emit(WishlistErrorState(message: l.message)),
       (r) {
-        products = r.data?.products ?? [];
+        products = r.products ?? [];
         emit(WishlistSuccessState());
       },
     );
@@ -29,7 +29,7 @@ class WishlistCubit extends Cubit<WishlistState> {
     response.fold(
       (l) => emit(WishlistErrorState(message: l.message)),
       (r) {
-        products = r.data?.products ?? [];
+        products = r.products ?? [];
         emit(WishlistSuccessState());
       },
     );

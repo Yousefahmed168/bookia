@@ -4,10 +4,10 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/services/dio/apis.dart';
 import '../../../../core/services/dio/dio_provider.dart';
 import '../../../../core/services/local/shared_pref.dart';
-import '../models/cart_response/cart_response.dart';
+import '../models/cart_response/data.dart';
 
 class CartRepo {
-  static Future<Either<Failure, CartResponse>> getCart() async {
+  static Future<Either<Failure, Data>> getCart() async {
     var response = await DioProvider.getApi(
       endpoint: Apis.cart,
       headers: {"Authorization": "Bearer ${SharedPref.getToken()}"},
@@ -17,7 +17,7 @@ class CartRepo {
       (l) => Left(l),
       (right) {
         try {
-          return Right(CartResponse.fromJson(right));
+          return Right(Data.fromJson(right as Map<String, dynamic>));
         } catch (e) {
           return Left(ParseFailure(message: 'Error parsing cart data'));
         }
@@ -25,7 +25,7 @@ class CartRepo {
     );
   }
 
-  static Future<Either<Failure, CartResponse>> addToCart(int productId) async {
+  static Future<Either<Failure, Data>> addToCart(int productId) async {
     var response = await DioProvider.postApi(
       endpoint: Apis.addToCart,
       data: {"product_id": productId},
@@ -36,7 +36,7 @@ class CartRepo {
       (l) => Left(l),
       (right) {
         try {
-          return Right(CartResponse.fromJson(right));
+          return Right(Data.fromJson(right as Map<String, dynamic>));
         } catch (e) {
           return Left(ParseFailure(message: 'Error parsing cart data'));
         }
@@ -44,7 +44,7 @@ class CartRepo {
     );
   }
 
-  static Future<Either<Failure, CartResponse>> removeFromCart(
+  static Future<Either<Failure, Data>> removeFromCart(
       int cartItemId) async {
     var response = await DioProvider.postApi(
       endpoint: Apis.removeFromCart,
@@ -56,7 +56,7 @@ class CartRepo {
       (l) => Left(l),
       (right) {
         try {
-          return Right(CartResponse.fromJson(right));
+          return Right(Data.fromJson(right as Map<String, dynamic>));
         } catch (e) {
           return Left(ParseFailure(message: 'Error parsing cart data'));
         }
@@ -64,7 +64,7 @@ class CartRepo {
     );
   }
 
-  static Future<Either<Failure, CartResponse>> updateCart(
+  static Future<Either<Failure, Data>> updateCart(
       int cartItemId, int quantity) async {
     var response = await DioProvider.postApi(
       endpoint: Apis.updateCart,
@@ -76,7 +76,7 @@ class CartRepo {
       (l) => Left(l),
       (right) {
         try {
-          return Right(CartResponse.fromJson(right));
+          return Right(Data.fromJson(right as Map<String, dynamic>));
         } catch (e) {
           return Left(ParseFailure(message: 'Error parsing cart data'));
         }

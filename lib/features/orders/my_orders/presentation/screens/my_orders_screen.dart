@@ -52,7 +52,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
         },
         builder: (context, state) {
           var cubit = context.read<MyOrderCubit>();
-          var orders = cubit.myOrdersResponse?.data?.orders;
+          var orders = cubit.myOrdersResponse;
 
           if (orders != null && orders.isEmpty) {
             return Center(child: Text("no_orders_found".tr()));

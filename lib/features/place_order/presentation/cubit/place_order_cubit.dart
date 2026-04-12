@@ -16,7 +16,7 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
     response.fold(
       (l) => emit(GovernoratesErrorState(message: l.message)),
       (r) {
-        governorates = r.data ?? [];
+        governorates = r;
         emit(GovernoratesSuccessState());
       },
     );

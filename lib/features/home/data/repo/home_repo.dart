@@ -1,25 +1,32 @@
-import 'package:bookia/core/services/dio/failure.dart';
-import 'package:dartz/dartz.dart';
-
-import '../../../../core/services/dio/apis.dart';
-import '../../../../core/services/dio/dio_provider.dart';
-import '../models/best_seller_books_response/best_seller_books_response.dart';
-import '../models/slider_response/slider_response.dart';
+import 'package:bookia/core/services/dio/apis.dart';
+import 'package:bookia/core/services/dio/dio_provider.dart';
+import 'package:bookia/features/home/data/models/best_seller_books_response/best_seller_books_response.dart';
+import 'package:bookia/features/home/data/models/slider_response/slider_response.dart';
 
 class HomeRepo {
-  static Future<Either<Failure, SliderResponse>> getSliders() async {
-    var response = await DioProvider.getApi(endpoint: Apis.sliders);
-    return response.fold(
-      (l) => Left(l),
-      (right) => Right(SliderResponse.fromJson(right)),
-    );
+  static Future<SliderResponse?> getSliders() async {
+    try {
+      var response = await DioProvider.get(endpoint: Apis.sliders);
+      if (response.statusCode == 200) {
+        return SliderResponse.fromJson(response.data);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
   }
 
-  static Future<Either<Failure, BestSellerBooksResponse>> getBestSeller() async {
-    var response = await DioProvider.getApi(endpoint: Apis.productsBestseller);
-    return response.fold(
-      (l) => Left(l),
-      (right) => Right(BestSellerBooksResponse.fromJson(right)),
-    );
+  static Future<BestSellerBooksResponse?> getBestSeller() async {
+    try {
+      var response = await DioProvider.get(endpoint: Apis.productsBestseller);
+      if (response.statusCode == 200) {
+        return BestSellerBooksResponse.fromJson(response.data);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
   }
 }

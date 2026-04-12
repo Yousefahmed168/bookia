@@ -60,7 +60,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 context
                     .read<OrderDetailsCubit>()
                     .orderDetailsResponse
-                    ?.data
                     ?.orderCode ??
                 widget.orderId.toString();
 
@@ -82,7 +81,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
         },
         builder: (context, state) {
           final cubit = context.read<OrderDetailsCubit>();
-          final order = cubit.orderDetailsResponse?.data;
+          final order = cubit.orderDetailsResponse;
 
           if (state is OrderDetailsLoading && order == null) {
             return const SizedBox.shrink();

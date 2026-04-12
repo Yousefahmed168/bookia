@@ -10,9 +10,7 @@ class WishlistResponse {
 
   factory WishlistResponse.fromJson(Map<String, dynamic> json) {
     return WishlistResponse(
-      data: json['data'] == null
-          ? null
-          : Data.fromJson(json['data'] as Map<String, dynamic>),
+      data: json['data'] == null ? null : Data.fromJson(json['data']),
       message: json['message'] as String?,
       error: json['error'] as List<dynamic>?,
       status: json['status'] as int?,

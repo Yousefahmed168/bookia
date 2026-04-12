@@ -23,12 +23,12 @@ class OrderProduct {
     orderProductId: json['order_product_id'] as int?,
     productId: json['product_id'] as int?,
     productName: json['product_name'] as String?,
-    productPrice: json['product_price'] as String?,
+    productPrice: json['product_price']?.toString(),
     productDiscount: json['product_discount'] as int?,
     productPriceAfterDiscount: (json['product_price_after_discount'] as num?)
         ?.toDouble(),
     orderProductQuantity: json['order_product_quantity'] as int?,
-    productTotal: json['product_total'] as String?,
+    productTotal: json['product_total']?.toString(),
   );
 
   Map<String, dynamic> toJson() => {

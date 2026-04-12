@@ -1,8 +1,9 @@
+import 'package:bookia/core/services/dio/apis.dart';
+import 'package:bookia/core/services/dio/base_response.dart';
 import 'package:bookia/core/services/dio/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-import 'apis.dart';
 
 abstract class DioProvider {
   static late final Dio dio;
@@ -11,7 +12,7 @@ abstract class DioProvider {
     dio = Dio(BaseOptions(baseUrl: Apis.baseUrl));
   }
 
-   static Future<Either<Failure, dynamic>> postApi({
+  static Future<Either<Failure, dynamic>> postApi({
     required String endpoint,
     Object? data,
     Map<String, dynamic>? headers,
@@ -27,11 +28,15 @@ abstract class DioProvider {
       if (response.statusCode == 200 || response.statusCode == 201) {
         return _handleResponse(response);
       } else {
-        return Left(ApiFailure(message: response.data['message']));
+        var message = 'Something went wrong';
+        try {
+          message = response.data['message'] ?? message;
+        } catch (_) {}
+        return Left(ApiFailure(message: message));
       }
     } on DioException catch (e) {
       return Left(_handleDioError(e));
-    } on Exception catch (_) {
+    } catch (e) {
       return Left(UnknownFailure(message: "Something went wrong"));
     }
   }
@@ -52,17 +57,31 @@ abstract class DioProvider {
       if (response.statusCode == 200 || response.statusCode == 201) {
         return _handleResponse(response);
       } else {
-        return Left(ApiFailure(message: response.data['message']));
+        var message = 'Something went wrong';
+        try {
+          message = response.data['message'] ?? message;
+        } catch (_) {}
+        return Left(ApiFailure(message: message));
       }
     } on DioException catch (e) {
       return Left(_handleDioError(e));
-    } on Exception catch (_) {
+    } catch (e) {
       return Left(UnknownFailure(message: "Something went wrong"));
     }
   }
 
   static Either<Failure, dynamic> _handleResponse(Response<dynamic> response) {
-    return Right(response.data);
+    var json = response.data as Map<String, dynamic>;
+    if (json.containsKey('data')) {
+      try {
+        var baseResponse = BaseResponse.fromJson(response.data);
+        return Right(baseResponse.data);
+      } on Exception catch (e) {
+        return Left(ParseFailure(message: e.toString()));
+      }
+    } else {
+      return Right(response.data);
+    }
   }
 
   static Failure _handleDioError(DioException e) {
@@ -77,7 +96,14 @@ abstract class DioProvider {
         );
 
       case DioExceptionType.badResponse:
-        return ApiFailure(message: e.response?.data['message']);
+        var message = 'Something went wrong';
+        try {
+          message = e.response?.data['message'] ?? message;
+        } catch (_) {}
+        return ApiFailure(
+          message: message,
+          statusCode: e.response?.statusCode,
+        );
 
       case DioExceptionType.cancel:
         return ApiFailure(
@@ -98,7 +124,6 @@ abstract class DioProvider {
         );
     }
   }
-
 
   static Future<Response> post({
     required String endpoint,
@@ -158,7 +183,7 @@ abstract class DioProvider {
 
   static Future<Response> patch({
     required String endpoint,
-    Object? data,
+    Map<String, dynamic>? data,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? queryParameters,
   }) async {
