@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../core/services/di/service_locator.dart';
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/routes/navigations.dart';
 import '../../../../core/functions/validations.dart';
@@ -24,7 +23,7 @@ class ForgetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCubit(),
+      create: (context) => getIt<AuthCubit>(),
       child: Scaffold(
         appBar: AppBar(
           centerTitle: false,
@@ -41,7 +40,8 @@ class ForgetPasswordScreen extends StatelessWidget {
         body: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccessState) {
-              log('success');
+              pop(context); // dismiss loading dialog
+              pushTo(context, Routes.otpverfication);
             } else if (state is AuthErrorState) {
               showMyDialog(context, state.message);
             } else if (state is AuthLoadingState) {
@@ -53,46 +53,48 @@ class ForgetPasswordScreen extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(22),
               child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('forgot_password_title'.tr(), style: TextStyles.headline),
-                    Gap(10),
-                    Text(
-                      'forgot_password_desc'.tr(),
-                      style: TextStyles.body.copyWith(
-                        color: AppColors.darkGreyColor,
+                child: Form(
+                  key: cubit.formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('forgot_password_title'.tr(), style: TextStyles.headline),
+                      Gap(10),
+                      Text(
+                        'forgot_password_desc'.tr(),
+                        style: TextStyles.body.copyWith(
+                          color: AppColors.darkGreyColor,
+                        ),
                       ),
-                    ),
-                    Gap(30),
-                    CustomTextFormField(
-                      hintText: 'email_hint'.tr(),
-                      controller: cubit.emailController,
-                      validator: (input) {
-                        if (input!.isEmpty) {
-                          return 'please Enter Your Email';
-                        } else if (!isEmailValid(input)) {
-                          return 'Please Enter a Valid Email';
-                        }
-                        return null;
-                      },
-                    ),
-                    Gap(40),
+                      Gap(30),
+                      CustomTextFormField(
+                        hintText: 'email_hint'.tr(),
+                        controller: cubit.emailController,
+                        validator: (input) {
+                          if (input!.isEmpty) {
+                            return 'please Enter Your Email';
+                          } else if (!isEmailValid(input)) {
+                            return 'Please Enter a Valid Email';
+                          }
+                          return null;
+                        },
+                      ),
+                      Gap(40),
 
-                    MainButton(
-                      bgColor: AppColors.primaryColor,
-                      text: 'send_code'.tr(),
-                      textColor: AppColors.backgroundColor,
-                      onPressed: () {
-                        pushTo(context, Routes.otpverfication);
-                        if (cubit.formKey.currentState!.validate()) {
-                          cubit.forgetpassword();
-                        }
-                      },
-                    ),
+                      MainButton(
+                        bgColor: AppColors.primaryColor,
+                        text: 'send_code'.tr(),
+                        textColor: AppColors.backgroundColor,
+                        onPressed: () {
+                          if (cubit.formKey.currentState!.validate()) {
+                            cubit.forgetpassword();
+                          }
+                        },
+                      ),
 
-                    Gap(361),
-                  ],
+                      Gap(361),
+                    ],
+                  ),
                 ),
               ),
             );

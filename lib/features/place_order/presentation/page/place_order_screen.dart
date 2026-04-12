@@ -15,6 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../core/services/di/service_locator.dart';
+
 class PlaceOrderScreen extends StatefulWidget {
   final String? total;
 
@@ -46,7 +48,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PlaceOrderCubit()..getGovernorates(),
+      create: (context) => getIt<PlaceOrderCubit>()..getGovernorates(),
       child: Scaffold(
         appBar: AppBar(
           title: const CustomBackButton(),

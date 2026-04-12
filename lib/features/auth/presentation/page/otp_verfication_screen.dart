@@ -1,11 +1,10 @@
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:pinput/pinput.dart';
 
+import '../../../../core/services/di/service_locator.dart';
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/routes/navigations.dart';
 import '../../../../core/routes/routes.dart';
@@ -23,7 +22,7 @@ class OtpVerficationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCubit(),
+      create: (context) => getIt<AuthCubit>(),
       child: Scaffold(
         appBar: AppBar(
           centerTitle: false,
@@ -39,7 +38,8 @@ class OtpVerficationScreen extends StatelessWidget {
         body: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccessState) {
-              log('success');
+              pop(context); // dismiss loading dialog
+              pushReplacement(context, Routes.createnewpassword);
             } else if (state is AuthErrorState) {
               showMyDialog(context, state.message);
             } else if (state is AuthLoadingState) {
@@ -77,7 +77,6 @@ class OtpVerficationScreen extends StatelessWidget {
                       text: 'verify'.tr(),
                       textColor: AppColors.backgroundColor,
                       onPressed: () {
-                        pushReplacement(context, Routes.createnewpassword);
                         cubit.otpcode();
                       },
                     ),

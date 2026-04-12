@@ -8,6 +8,7 @@ import '../../../../../core/routes/navigations.dart';
 import '../../../../../core/styles/colors.dart';
 import '../../../../../core/widgets/custom_svg_picture.dart';
 import '../../../../../core/widgets/dialog.dart';
+import '../../../../../core/services/di/service_locator.dart';
 import 'cubit/wishlist_action_cubit.dart';
 import 'cubit/wishlist_icon_state.dart';
 
@@ -19,7 +20,7 @@ class WishlistActionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => WishlistActionCubit(),
+      create: (context) => getIt<WishlistActionCubit>(),
       child: BlocConsumer<WishlistActionCubit, WishlistActionState>(
         listener: (context, state) {
           if (state is WishlistActionSuccessState) {

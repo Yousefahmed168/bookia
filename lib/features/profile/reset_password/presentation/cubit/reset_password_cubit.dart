@@ -1,32 +1,37 @@
-
-import '../../data/models/reset_password_params.dart';
-import '../../data/repo/reset_password_repo.dart';
+import '../../domain/usecases/reset_password_use_case.dart';
 import 'reset_password_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/models/reset_password_params.dart';
+
 class ResetPasswordCubit extends Cubit<ResetPasswordState> {
-  ResetPasswordCubit() : super(ResetPasswordInitial());
+  final ResetProfilePasswordUseCase resetProfilePasswordUseCase;
 
-  final formKey = GlobalKey<FormState>();
-  final currentPasswordController = TextEditingController();
-  final newPasswordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
+  ResetPasswordCubit(this.resetProfilePasswordUseCase)
+      : super(ResetPasswordInitial());
 
-  final ResetPasswordParams params = ResetPasswordParams();
+  final TextEditingController currentPasswordController =
+      TextEditingController();
+  final TextEditingController newPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   Future<void> updatePassword() async {
-    emit(ResetPasswordLoading());
+    if (formKey.currentState!.validate()) {
+      emit(ResetPasswordLoading());
+      var params = ResetPasswordParams(
+        currentPassword: currentPasswordController.text,
+        newPassword: newPasswordController.text,
+        newPasswordConfirmation: confirmPasswordController.text,
+      );
+      var response = await resetProfilePasswordUseCase(params);
 
-    params.currentPassword = currentPasswordController.text;
-    params.newPassword = newPasswordController.text;
-    params.newPasswordConfirmation = confirmPasswordController.text;
-
-    var response = await ResetPasswordRepo.updatePassword(params);
-
-    response.fold(
-      (l) => emit(ResetPasswordError(message: l.message)),
-      (r) => emit(ResetPasswordSuccess(message: r.message ?? "Success")),
-    );
+      response.fold(
+        (l) => emit(ResetPasswordError(message: l.message)),
+        (r) => emit(ResetPasswordSuccess(message: r.message ?? "Success")),
+      );
+    }
   }
 }

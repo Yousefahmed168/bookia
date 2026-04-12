@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../core/services/di/service_locator.dart';
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/routes/navigations.dart';
 import '../../../../core/routes/routes.dart';
@@ -23,7 +22,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCubit(),
+      create: (context) => getIt<AuthCubit>(),
       child: Scaffold(
         appBar: AppBar(
           centerTitle: false,
@@ -39,7 +38,8 @@ class CreateNewPasswordScreen extends StatelessWidget {
         body: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccessState) {
-              log('success');
+              pop(context); // dismiss loading dialog
+              pushTo(context, Routes.passwordchanged);
             } else if (state is AuthErrorState) {
               showMyDialog(context, state.message);
             } else if (state is AuthLoadingState) {
@@ -51,39 +51,54 @@ class CreateNewPasswordScreen extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(22),
               child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('create_new_password'.tr(), style: TextStyles.headline),
-                    Gap(10),
-
-                    Text(
-                      'new_password_desc'.tr(),
-                      style: TextStyles.body.copyWith(
-                        color: AppColors.darkGreyColor,
+                child: Form(
+                  key: cubit.formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('create_new_password'.tr(), style: TextStyles.headline),
+                      Gap(10),
+                      Text(
+                        'new_password_desc'.tr(),
+                        style: TextStyles.body.copyWith(
+                          color: AppColors.darkGreyColor,
+                        ),
                       ),
-                    ),
-                    Gap(32),
-                    PasswordTextFormField(
-                      hintText: 'new_password'.tr(),
-                      controller: cubit.passwordController,
-                    ),
-                    Gap(11),
-                    PasswordTextFormField(
-                      hintText: 'confirm_password'.tr(),
-                      controller: cubit.passwordConfirmationController,
-                    ),
-                    Gap(50),
-                    MainButton(
-                      bgColor: AppColors.primaryColor,
-                      text: 'reset_password'.tr(),
-                      textColor: AppColors.backgroundColor,
-                      onPressed: () {
-                        pushTo(context, Routes.passwordchanged);
-                        cubit.resetpassword();
-                      },
-                    ),
-                  ],
+                      Gap(32),
+                      PasswordTextFormField(
+                        hintText: 'new_password'.tr(),
+                        controller: cubit.passwordController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a new password';
+                          }
+                          return null;
+                        },
+                      ),
+                      Gap(11),
+                      PasswordTextFormField(
+                        hintText: 'confirm_password'.tr(),
+                        controller: cubit.passwordConfirmationController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please confirm your password';
+                          }
+                          return null;
+                        },
+                      ),
+                      Gap(50),
+                      MainButton(
+                        bgColor: AppColors.primaryColor,
+                        text: 'reset_password'.tr(),
+                        textColor: AppColors.backgroundColor,
+                        onPressed: () {
+                          if (cubit.formKey.currentState!.validate()) {
+                            cubit.resetpassword();
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

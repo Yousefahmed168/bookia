@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/styles/text_styles.dart';
 import '../../../../core/widgets/my_body_view.dart';
+import '../../../../core/services/di/service_locator.dart';
 import '../cubit/wishlist_cubit.dart';
 import '../widgets/wishlist_books.dart';
 
@@ -20,7 +21,7 @@ class WishlistScreen extends StatelessWidget {
       ),
       body: MyBodyView(
         child: BlocProvider(
-          create: (context) => WishlistCubit()..getWishlist(),
+          create: (context) => getIt<WishlistCubit>()..getWishlist(),
           child: WishlistBooks(),
         ),
       ),

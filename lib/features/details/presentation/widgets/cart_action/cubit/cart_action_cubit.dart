@@ -1,14 +1,21 @@
 import '../../../../../../core/services/local/shared_pref.dart';
-import '../../../../../cart/data/repo/cart_repo.dart';
+import '../../../../../cart/domain/usecases/add_to_cart_use_case.dart';
+import '../../../../../cart/domain/usecases/remove_from_cart_use_case.dart';
 import 'cart_action_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartActionCubit extends Cubit<CartActionState> {
-  CartActionCubit() : super(CartActionInitial());
+  final AddToCartUseCase addToCartUseCase;
+  final RemoveFromCartUseCase removeFromCartUseCase;
+
+  CartActionCubit({
+    required this.addToCartUseCase,
+    required this.removeFromCartUseCase,
+  }) : super(CartActionInitial());
 
   Future<void> addToCart(int productId) async {
     emit(CartActionLoadingState());
-    var response = await CartRepo.addToCart(productId);
+    var response = await addToCartUseCase(productId);
     response.fold((l) => emit(CartActionErrorState(message: l.message)), (r) {
       var products = r.cartItems ?? [];
       SharedPref.cacheCartIds(products);
@@ -18,7 +25,7 @@ class CartActionCubit extends Cubit<CartActionState> {
 
   Future<void> removeFromCart(int productId) async {
     emit(CartActionLoadingState());
-    var response = await CartRepo.removeFromCart(productId);
+    var response = await removeFromCartUseCase(productId);
     response.fold((l) => emit(CartActionErrorState(message: l.message)), (r) {
       var products = r.cartItems ?? [];
       SharedPref.cacheCartIds(products);

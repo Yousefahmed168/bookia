@@ -1,16 +1,18 @@
 import 'package:bookia/features/faq/data/models/faq_model.dart';
-import 'package:bookia/features/faq/data/repo/faq_repo.dart';
+import '../../domain/usecases/get_faqs_use_case.dart';
 import 'package:bookia/features/faq/presentation/cubit/faq_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FaqCubit extends Cubit<FaqState> {
-  FaqCubit() : super(FaqInitial());
+  final GetFaqsUseCase getFaqsUseCase;
+
+  FaqCubit(this.getFaqsUseCase) : super(FaqInitial());
 
   List<FaqModel> faqs = [];
 
   Future<void> getFaqs() async {
     emit(FaqLoadingState());
-    var response = await FaqRepo.getFaqs();
+    var response = await getFaqsUseCase();
 
     response.fold(
       (l) => emit(FaqErrorState(l.message)),

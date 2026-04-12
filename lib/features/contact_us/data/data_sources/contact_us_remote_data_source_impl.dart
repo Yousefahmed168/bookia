@@ -1,19 +1,20 @@
+import 'package:bookia/core/services/dio/apis.dart';
+import 'package:bookia/core/services/dio/dio_provider.dart';
 import 'package:bookia/core/services/dio/failure.dart';
+import 'package:bookia/core/services/local/shared_pref.dart';
+import 'package:bookia/features/contact_us/data/data_sources/contact_us_remote_data_source.dart';
 import 'package:dartz/dartz.dart';
 
-import '../../../core/services/dio/apis.dart';
-import '../../../core/services/dio/dio_provider.dart';
-import '../../../core/services/local/shared_pref.dart';
-
-class ContactUsRepo {
-  static Future<Either<Failure, bool>> sendMessage({
+class ContactUsRemoteDataSourceImpl implements ContactUsRemoteDataSource {
+  @override
+  Future<Either<Failure, dynamic>> sendMessage({
     required String name,
     required String email,
     required String subject,
     required String message,
   }) async {
     final token = SharedPref.getToken();
-    var response = await DioProvider.postApi(
+    return await DioProvider.postApi(
       endpoint: Apis.contactUs,
       headers: {'Authorization': 'Bearer $token'},
       data: {
@@ -22,11 +23,6 @@ class ContactUsRepo {
         'subject': subject,
         'message': message,
       },
-    );
-
-    return response.fold(
-      (l) => Left(l),
-      (r) => const Right(true),
     );
   }
 }

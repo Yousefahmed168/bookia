@@ -13,6 +13,7 @@ import '../../../../../core/styles/text_styles.dart';
 import '../../../../../core/widgets/my_body_view.dart';
 import '../../../../../core/routes/routes.dart';
 import '../../../../auth/presentation/page/login_screen.dart';
+import '../../../../../core/services/di/service_locator.dart';
 import '../../../edit_profile/cubit/edit_profile_cubit.dart';
 import '../../../edit_profile/cubit/edit_profile_state.dart';
 import '../widgets/profile_item.dart';
@@ -29,7 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     var profileData = SharedPref.getUserInfo();
     return BlocProvider(
-      create: (context) => EditProfileCubit()..loadInitData(),
+      create: (context) => getIt<EditProfileCubit>()..loadInitData(),
       child: BlocListener<EditProfileCubit, EditProfileState>(
         listener: (context, state) {
           if (state is LogoutLoadingState) {

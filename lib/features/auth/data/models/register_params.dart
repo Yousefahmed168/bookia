@@ -1,15 +1,10 @@
-class RegisterParams {
+class AuthParams {
   String? name;
   String? email;
   String? password;
   String? passwordConfirmation;
 
-  RegisterParams({
-    this.name,
-    this.email,
-    this.password,
-    this.passwordConfirmation,
-  });
+  AuthParams({this.name, this.email, this.password, this.passwordConfirmation});
 
   Map<String, dynamic> toJson() => {
     'name': name,
@@ -17,6 +12,7 @@ class RegisterParams {
     'password': password,
     'password_confirmation': passwordConfirmation,
   };
+
   @override
   String toString() {
     return "name,$name email,$email password,$password passwordConfirmation,$passwordConfirmation";

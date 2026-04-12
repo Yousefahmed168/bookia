@@ -1,18 +1,17 @@
 import 'package:bookia/core/services/dio/failure.dart';
+import 'package:bookia/features/faq/data/data_sources/faq_remote_data_source.dart';
+import 'package:bookia/features/faq/domain/repo/faq_repo.dart';
 import 'package:dartz/dartz.dart';
-
-import '../../../../core/services/dio/apis.dart';
-import '../../../../core/services/dio/dio_provider.dart';
-import '../../../../core/services/local/shared_pref.dart';
 import '../models/faq_model.dart';
 
-class FaqRepo {
-  static Future<Either<Failure, List<FaqModel>>> getFaqs() async {
-    final token = SharedPref.getToken();
-    var response = await DioProvider.getApi(
-      endpoint: Apis.faqs,
-      headers: {'Authorization': 'Bearer $token'},
-    );
+class FaqRepoImpl implements FaqRepo {
+  final FaqRemoteDataSource remoteDataSource;
+
+  FaqRepoImpl(this.remoteDataSource);
+
+  @override
+  Future<Either<Failure, List<FaqModel>>> getFaqs() async {
+    var response = await remoteDataSource.getFaqs();
 
     return response.fold(
       (failure) => Left(failure),
@@ -23,18 +22,17 @@ class FaqRepo {
           }
           final faqsList = data['data']['faqs'] as List;
           if (faqsList.isEmpty) {
+            // Fallback to static FAQ data if empty as per old implementation
             return Right([
               FaqModel(
                 id: 1,
                 question: 'How to place an order?',
-                answer:
-                    'You can place an order by adding books to your cart and proceeding to checkout.',
+                answer: 'You can place an order by adding books to your cart and proceeding to checkout.',
               ),
               FaqModel(
                 id: 2,
                 question: 'How to track my order?',
-                answer:
-                    'You can track your order from the My Orders section in your profile.',
+                answer: 'You can track your order from the My Orders section in your profile.',
               ),
               FaqModel(
                 id: 3,

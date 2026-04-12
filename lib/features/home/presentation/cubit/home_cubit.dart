@@ -1,14 +1,17 @@
-import 'package:bookia/features/home/data/models/best_seller_books_response/best_seller_books_response.dart';
 import 'package:bookia/features/home/data/models/best_seller_books_response/product.dart';
 import 'package:bookia/features/home/data/models/slider_response/slider.dart';
-import 'package:bookia/features/home/data/models/slider_response/slider_response.dart';
-import 'package:bookia/features/home/data/repo/home_repo.dart';
-import 'package:bookia/features/home/presentation/cubit/home_state.dart';
-import 'package:easy_localization/easy_localization.dart';
+import '../../domain/usecases/home_use_cases.dart';
+import 'home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(HomeInitialState());
+  final GetSlidersUseCase getSlidersUseCase;
+  final GetBestSellerUseCase getBestSellerUseCase;
+
+  HomeCubit({
+    required this.getSlidersUseCase,
+    required this.getBestSellerUseCase,
+  }) : super(HomeInitialState());
 
   List<Slider> sliders = [];
   List<Product> products = [];
@@ -17,22 +20,32 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> initLoadData() async {
     emit(HomeLoadingState());
-
-    var responses = await Future.wait([
-      HomeRepo.getSliders(),
-      HomeRepo.getBestSeller(),
+    await Future.wait([
+      getSliders(),
+      getBestSeller(),
     ]);
+  }
 
-    var slidersResponse = responses[0] as SliderResponse?;
-    var bestSellerResponse = responses[1] as BestSellerBooksResponse?;
+  Future<void> getSliders() async {
+    var response = await getSlidersUseCase();
+    response.fold(
+      (l) => emit(HomeErrorState(message: l.message)),
+      (r) {
+        sliders = r.data?.sliders ?? [];
+        emit(HomeSuccessState());
+      },
+    );
+  }
 
-    if (slidersResponse != null || bestSellerResponse != null) {
-      sliders = slidersResponse?.data?.sliders ?? [];
-      products = bestSellerResponse?.data?.products ?? [];
-      emit(HomeSuccessState());
-    } else {
-      emit(HomeErrorState(message: 'error'.tr()));
-    }
+  Future<void> getBestSeller() async {
+    var response = await getBestSellerUseCase();
+    response.fold(
+      (l) => emit(HomeErrorState(message: l.message)),
+      (r) {
+        products = r.data?.products ?? [];
+        emit(HomeSuccessState());
+      },
+    );
   }
 
   void onChangeSlider(int index) {

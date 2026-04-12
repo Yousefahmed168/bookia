@@ -26,8 +26,9 @@ import '../../features/splash/splash_screen.dart';
 import '../../features/place_order/presentation/page/place_order_screen.dart';
 import '../../features/profile/edit_profile/cubit/edit_profile_cubit.dart';
 import '../../features/profile/edit_profile/page/edit_profile_screen.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../services/di/service_locator.dart';
 
 class AppRouter {
   static var routes = GoRouter(
@@ -44,7 +45,7 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.loginscreen,
-        builder: (context, state) => LoginScreen(),
+        builder: (context, state) => const LoginScreen(),
       ),
       GoRoute(
         path: Routes.registerscreen,
@@ -63,19 +64,19 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.createnewpassword,
-        builder: (context, state) => CreateNewPasswordScreen(),
+        builder: (context, state) => const CreateNewPasswordScreen(),
       ),
       GoRoute(
         path: Routes.otpverfication,
-        builder: (context, state) => OtpVerficationScreen(),
+        builder: (context, state) => const OtpVerficationScreen(),
       ),
       GoRoute(
         path: Routes.passwordchanged,
-        builder: (context, state) => PasswordChanged(),
+        builder: (context, state) => const PasswordChanged(),
       ),
       GoRoute(
         path: Routes.forgetpassword,
-        builder: (context, state) => ForgetPasswordScreen(),
+        builder: (context, state) => const ForgetPasswordScreen(),
       ),
       GoRoute(
         path: Routes.details,
@@ -96,19 +97,15 @@ class AppRouter {
         path: Routes.editProfile,
         builder: (context, state) {
           return BlocProvider(
-            create: (context) {
-              var cubit = EditProfileCubit();
-              cubit.loadInitData();
-              return cubit;
-            },
-            child: EditProfileScreen(),
+            create: (context) => getIt<EditProfileCubit>()..loadInitData(),
+            child: const EditProfileScreen(),
           );
         },
       ),
       GoRoute(
         path: Routes.myOrders,
         builder: (context, state) => BlocProvider(
-          create: (context) => MyOrderCubit(),
+          create: (context) => getIt<MyOrderCubit>()..getOrders(),
           child: const MyOrdersScreen(),
         ),
       ),
@@ -118,7 +115,7 @@ class AppRouter {
           final orderId = state.extra as int;
 
           return BlocProvider(
-            create: (context) => OrderDetailsCubit()..getOrderDetails(orderId),
+            create: (context) => getIt<OrderDetailsCubit>()..getOrderDetails(orderId),
             child: OrderDetailsScreen(orderId: orderId),
           );
         },
@@ -126,21 +123,21 @@ class AppRouter {
       GoRoute(
         path: Routes.resetPassword,
         builder: (context, state) => BlocProvider(
-          create: (context) => ResetPasswordCubit(),
+          create: (context) => getIt<ResetPasswordCubit>(),
           child: const ResetPasswordScreen(),
         ),
       ),
       GoRoute(
         path: Routes.faq,
         builder: (context, state) => BlocProvider(
-          create: (context) => FaqCubit(),
+          create: (context) => getIt<FaqCubit>()..getFaqs(),
           child: const FaqScreen(),
         ),
       ),
       GoRoute(
         path: Routes.contactUs,
         builder: (context, state) => BlocProvider(
-          create: (context) => ContactUsCubit(),
+          create: (context) => getIt<ContactUsCubit>(),
           child: const ContactUsScreen(),
         ),
       ),

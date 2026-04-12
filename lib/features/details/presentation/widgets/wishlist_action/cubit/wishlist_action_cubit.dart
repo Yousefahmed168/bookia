@@ -1,15 +1,20 @@
-
 import '../../../../../../core/services/local/shared_pref.dart';
+import '../../../../../wishlist/domain/usecases/wishlist_use_cases.dart';
 import 'wishlist_icon_state.dart';
-import '../../../../../wishlist/data/repo/wishlist_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WishlistActionCubit extends Cubit<WishlistActionState> {
-  WishlistActionCubit() : super(WishlistActionInitial());
+  final AddToWishlistUseCase addToWishlistUseCase;
+  final RemoveFromWishlistUseCase removeFromWishlistUseCase;
+
+  WishlistActionCubit({
+    required this.addToWishlistUseCase,
+    required this.removeFromWishlistUseCase,
+  }) : super(WishlistActionInitial());
 
   Future<void> addToWishlist(int productId) async {
     emit(WishlistActionLoadingState());
-    var response = await WishlistRepo.addToWishlist(productId);
+    var response = await addToWishlistUseCase(productId);
 
     response.fold(
       (l) => emit(WishlistActionErrorState(message: l.message)),
@@ -23,7 +28,7 @@ class WishlistActionCubit extends Cubit<WishlistActionState> {
 
   Future<void> removeFromWishlist(int productId) async {
     emit(WishlistActionLoadingState());
-    var response = await WishlistRepo.removeFromWishlist(productId);
+    var response = await removeFromWishlistUseCase(productId);
 
     response.fold(
       (l) => emit(WishlistActionErrorState(message: l.message)),

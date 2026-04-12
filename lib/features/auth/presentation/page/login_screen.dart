@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../core/services/di/service_locator.dart';
+
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/routes/navigations.dart';
 import '../../../../core/functions/validations.dart';
@@ -25,7 +27,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCubit(),
+      create: (context) => getIt<AuthCubit>(),
       child: Builder(
         builder: (context) {
           var cubit = context.read<AuthCubit>();

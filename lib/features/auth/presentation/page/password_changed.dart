@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../core/services/di/service_locator.dart';
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/routes/navigations.dart';
 import '../../../../core/routes/routes.dart';
@@ -17,7 +18,7 @@ class PasswordChanged extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (_) => AuthCubit(), child: const _SignUpView());
+    return BlocProvider(create: (_) => getIt<AuthCubit>(), child: const _SignUpView());
   }
 }
 

@@ -8,6 +8,7 @@ import 'package:gap/gap.dart';
 
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/widgets/custom_svg_picture.dart';
+import '../../../../core/services/di/service_locator.dart';
 import '../cubit/home_cubit.dart';
 import '../widgets/best_seller_books.dart';
 import '../widgets/home_slider.dart';
@@ -18,7 +19,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit()..initLoadData(),
+      create: (context) => getIt<HomeCubit>()..initLoadData(),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           return Scaffold(
